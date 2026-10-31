@@ -13,7 +13,7 @@ from pydantic import BaseModel
 from grimcoven_equipos.catalogo import cargar_cazadores
 from grimcoven_equipos.equipos.aleatorio import generar_equipo_aleatorio
 
-router = APIRouter(prefix="/api/equipos", tags=["equipos"])
+router = APIRouter(prefix="/equipos", tags=["equipos"])
 
 
 class CazadorResumen(BaseModel):
@@ -25,7 +25,7 @@ class CazadorResumen(BaseModel):
 
 
 class EquipoAleatorioResponse(BaseModel):
-    """Esquema de respuesta de GET /api/equipos/aleatorio."""
+    """Esquema de respuesta de GET /equipos/aleatorio."""
 
     tamano: int
     semilla: int | None
