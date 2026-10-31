@@ -12,7 +12,7 @@ from unittest.mock import patch
 import pytest
 from fastapi.testclient import TestClient
 
-from grimcoven_equipos.api.app import create_app
+from grimcoven_equipos.app import create_app
 from grimcoven_equipos.catalogo import Cazador, cargar_cazadores
 from grimcoven_equipos.equipos.aleatorio import generar_equipo_aleatorio
 
