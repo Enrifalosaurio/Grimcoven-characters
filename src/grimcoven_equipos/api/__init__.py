@@ -1,1 +1,1 @@
-"""Paquete de routers de la API."""
+"""Subpaquete de la API HTTP de Grimcoven."""
