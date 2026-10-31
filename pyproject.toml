@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Generador de equipos para Grimcoven a partir de un catálogo de cazadores y Griefbound."
 requires-python = ">=3.11"
 dependencies = [
-    "fastapi",
+    "fastapi>=0.115",
     "jinja2",
     "pydantic>=2",
 ]
