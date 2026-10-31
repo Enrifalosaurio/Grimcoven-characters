@@ -1,0 +1,90 @@
+[
+  {
+    "id": "duality",
+    "nombre": "Duality",
+    "expansion": "base",
+    "complejidad": "Media",
+    "roles": ["dano", "tanque", "apoyo"],
+    "contrarresta": ["heridas"],
+    "vida": null,
+    "movimiento": null,
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 27}
+  },
+  {
+    "id": "gunslinger",
+    "nombre": "Gunslinger",
+    "expansion": "base",
+    "complejidad": "Baja",
+    "roles": ["dano", "control"],
+    "contrarresta": ["enjambre"],
+    "vida": 13,
+    "movimiento": 2,
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 27}
+  },
+  {
+    "id": "keeper",
+    "nombre": "Keeper",
+    "expansion": "base",
+    "complejidad": "Baja-Media",
+    "roles": ["dano", "tanque"],
+    "contrarresta": ["hambre", "enjambre", "heridas"],
+    "vida": null,
+    "movimiento": null,
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 28}
+  },
+  {
+    "id": "technomancer",
+    "nombre": "Technomancer",
+    "expansion": "base",
+    "complejidad": "Media-Alta",
+    "roles": ["dano", "apoyo"],
+    "contrarresta": ["quemadura", "maldicion"],
+    "vida": 12,
+    "movimiento": 2,
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 28}
+  },
+  {
+    "id": "mannequin",
+    "nombre": "Mannequin",
+    "expansion": "base",
+    "complejidad": "Alta",
+    "roles": ["apoyo", "dano", "tanque", "control"],
+    "contrarresta": [],
+    "vida": null,
+    "movimiento": null,
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 29}
+  },
+  {
+    "id": "death-jester",
+    "nombre": "Death Jester",
+    "expansion": "base",
+    "complejidad": "Media-Alta",
+    "roles": ["dano", "apoyo"],
+    "contrarresta": [],
+    "vida": null,
+    "movimiento": null,
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 29}
+  },
+  {
+    "id": "clockwork-giant",
+    "nombre": "Clockwork Giant",
+    "expansion": "hunters",
+    "complejidad": "Media",
+    "roles": ["tanque", "dano"],
+    "contrarresta": ["heridas"],
+    "vida": null,
+    "movimiento": null,
+    "fuente": {"fichero": "EN_Hunters Expansion.pdf", "pagina": 2}
+  },
+  {
+    "id": "twins",
+    "nombre": "Twins",
+    "expansion": "hunters",
+    "complejidad": "Alta",
+    "roles": ["apoyo", "dano"],
+    "contrarresta": [],
+    "vida": null,
+    "movimiento": null,
+    "fuente": {"fichero": "EN_Hunters Expansion.pdf", "pagina": 3}
+  }
+]

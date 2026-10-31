@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grimcoven-equipos"
+version = "0.1.0"
+description = "Generador de equipos para Grimcoven a partir de un catálogo de cazadores y Griefbound."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "jinja2",
+    "pydantic>=2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "httpx",
+    "ruff",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = [".factory"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

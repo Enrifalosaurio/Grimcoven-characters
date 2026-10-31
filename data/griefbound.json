@@ -1,0 +1,138 @@
+[
+  {
+    "id": "undead-general",
+    "nombre": "Undead General",
+    "tipo": "griefbound",
+    "expansion": "base",
+    "amenazas": ["estandartes"],
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 30}
+  },
+  {
+    "id": "swarm-mistress",
+    "nombre": "Swarm Mistress",
+    "tipo": "griefbound",
+    "expansion": "base",
+    "amenazas": ["enjambre"],
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 30}
+  },
+  {
+    "id": "convergence",
+    "nombre": "Convergence",
+    "tipo": "griefbound",
+    "expansion": "base",
+    "amenazas": ["quemadura"],
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 30}
+  },
+  {
+    "id": "tormentor",
+    "nombre": "Tormentor",
+    "tipo": "griefbound",
+    "expansion": "base",
+    "amenazas": ["heridas"],
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 30}
+  },
+  {
+    "id": "graveyard-dragon",
+    "nombre": "Graveyard Dragon",
+    "tipo": "griefbound",
+    "expansion": "base",
+    "amenazas": ["maldicion"],
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 30}
+  },
+  {
+    "id": "devourer",
+    "nombre": "Devourer",
+    "tipo": "griefbound",
+    "expansion": "base",
+    "amenazas": ["hambre"],
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 30}
+  },
+  {
+    "id": "chimera",
+    "nombre": "Chimera",
+    "tipo": "griefbound",
+    "expansion": "forgotten-entities",
+    "amenazas": ["defensa"],
+    "fuente": {"fichero": "EN_Forgotten Entities.pdf", "pagina": 1}
+  },
+  {
+    "id": "striga",
+    "nombre": "Striga",
+    "tipo": "griefbound",
+    "expansion": "forgotten-entities",
+    "amenazas": ["obsesion"],
+    "fuente": {"fichero": "EN_Forgotten Entities.pdf", "pagina": 1}
+  },
+  {
+    "id": "pretender-duality",
+    "nombre": "Pretender Duality",
+    "tipo": "pretender",
+    "expansion": "base",
+    "amenazas": [],
+    "cazador_origen": "duality",
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 31}
+  },
+  {
+    "id": "pretender-gunslinger",
+    "nombre": "Pretender Gunslinger",
+    "tipo": "pretender",
+    "expansion": "base",
+    "amenazas": [],
+    "cazador_origen": "gunslinger",
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 31}
+  },
+  {
+    "id": "pretender-keeper",
+    "nombre": "Pretender Keeper",
+    "tipo": "pretender",
+    "expansion": "base",
+    "amenazas": [],
+    "cazador_origen": "keeper",
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 31}
+  },
+  {
+    "id": "pretender-technomancer",
+    "nombre": "Pretender Technomancer",
+    "tipo": "pretender",
+    "expansion": "base",
+    "amenazas": [],
+    "cazador_origen": "technomancer",
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 32}
+  },
+  {
+    "id": "pretender-mannequin",
+    "nombre": "Pretender Mannequin",
+    "tipo": "pretender",
+    "expansion": "base",
+    "amenazas": [],
+    "cazador_origen": "mannequin",
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 32}
+  },
+  {
+    "id": "pretender-death-jester",
+    "nombre": "Pretender Death Jester",
+    "tipo": "pretender",
+    "expansion": "base",
+    "amenazas": [],
+    "cazador_origen": "death-jester",
+    "fuente": {"fichero": "GC_Rulebook_280x280mm_bleed3mm [36 pages]_[lowres]_compressed.pdf", "pagina": 32}
+  },
+  {
+    "id": "pretender-clockwork-giant",
+    "nombre": "Pretender Clockwork Giant",
+    "tipo": "pretender",
+    "expansion": "hunters",
+    "amenazas": [],
+    "cazador_origen": "clockwork-giant",
+    "fuente": {"fichero": "EN_Hunters Expansion.pdf", "pagina": 4}
+  },
+  {
+    "id": "pretender-twins",
+    "nombre": "Pretender Twins",
+    "tipo": "pretender",
+    "expansion": "hunters",
+    "amenazas": [],
+    "cazador_origen": "twins",
+    "fuente": {"fichero": "EN_Hunters Expansion.pdf", "pagina": 4}
+  }
+]
