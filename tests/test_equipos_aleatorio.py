@@ -7,7 +7,6 @@ from __future__ import annotations
 
 import random
 from collections import Counter
-from unittest.mock import patch
 
 import pytest
 from fastapi.testclient import TestClient
@@ -249,43 +248,10 @@ def test_limite_respuesta_incluye_semilla_null_sin_semilla(client) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Hallazgo 1: ValueError de generar_equipo_aleatorio -> HTTP 409
+# Hallazgos 1 y 2 (patch de grimcoven_equipos.api.equipos.cargar_cazadores) se
+# sustituyen en US-009 por tests/test_catalogo_inyectable.py: CA3 (409 con catalogo
+# inyectado) y CA5 (create_app propaga el ValueError de carga al arrancar).
 # ---------------------------------------------------------------------------
-
-
-def test_valor_error_equipo_insuficiente_devuelve_409(client, catalogo) -> None:
-    """Hallazgo 1: si el catalogo tiene menos cazadores que tamano, devuelve 409."""
-    # Inyectamos un catalogo con un solo cazador para forzar el ValueError.
-    subcatalogo = catalogo[:1]
-    with patch(
-        "grimcoven_equipos.api.equipos.cargar_cazadores",
-        return_value=subcatalogo,
-    ):
-        resp = client.get("/api/equipos/aleatorio", params={"tamano": 2})
-    assert resp.status_code == 409
-    body = resp.json()
-    assert "No hay suficientes cazadores" in body["detail"]
-
-
-# ---------------------------------------------------------------------------
-# Hallazgo 2: cargar_cazadores falla -> error HTTP sin filtrar detalles
-# ---------------------------------------------------------------------------
-
-
-def test_cargar_cazadores_falla_devuelve_500_sin_detalles_internos(client) -> None:
-    """Hallazgo 2: si cargar_cazadores lanza ValueError, responde 500 sin info interna."""
-    with patch(
-        "grimcoven_equipos.api.equipos.cargar_cazadores",
-        side_effect=ValueError("/ruta/secreta/cazadores.json: JSON invalido"),
-    ):
-        resp = client.get("/api/equipos/aleatorio", params={"tamano": 3})
-    assert resp.status_code == 500
-    body = resp.json()
-    # No debe filtrar la ruta interna ni el detalle del ValueError original
-    assert "/ruta/secreta" not in body.get("detail", "")
-    assert "JSON invalido" not in body.get("detail", "")
-    # Debe tener un mensaje generico
-    assert "catalogo" in body["detail"].lower()
 
 
 # ---------------------------------------------------------------------------

@@ -8,6 +8,7 @@ cualquier dato inválido.
 from __future__ import annotations
 
 import json
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Literal, TypeVar
 
@@ -123,3 +124,38 @@ def cargar_griefbound(
                     f"desconocido: {g.cazador_origen!r}"
                 )
     return griefbound
+
+
+@dataclass(frozen=True)
+class Catalogo:
+    """Catálogo inmutable de cazadores y Griefbound con búsquedas por id.
+
+    ``cazadores`` y ``griefbound`` conservan el orden en que se reciben (el del fichero JSON
+    cuando lo construye ``create_app``). Los routers lo obtienen con la dependencia
+    ``grimcoven_equipos.api.dependencias.obtener_catalogo``; cada app tiene el suyo en
+    ``app.state.catalogo``, sin estado global de módulo.
+    """
+
+    cazadores: tuple[Cazador, ...]
+    griefbound: tuple[Griefbound, ...]
+    _cazadores_por_id: dict[str, Cazador] = field(init=False, repr=False, compare=False)
+    _griefbound_por_id: dict[str, Griefbound] = field(init=False, repr=False, compare=False)
+
+    def __post_init__(self) -> None:
+        # Se aceptan listas u otros iterables, pero se guardan como tuplas inmutables.
+        object.__setattr__(self, "cazadores", tuple(self.cazadores))
+        object.__setattr__(self, "griefbound", tuple(self.griefbound))
+        object.__setattr__(self, "_cazadores_por_id", {c.id: c for c in self.cazadores})
+        object.__setattr__(self, "_griefbound_por_id", {g.id: g for g in self.griefbound})
+
+    def cazador(self, cazador_id: str) -> Cazador | None:
+        """Devuelve el cazador con ese id o ``None`` si no existe."""
+        return self._cazadores_por_id.get(cazador_id)
+
+    def griefbound_por_id(self, griefbound_id: str) -> Griefbound | None:
+        """Devuelve el Griefbound (o Pretender) con ese id o ``None`` si no existe."""
+        return self._griefbound_por_id.get(griefbound_id)
+
+    def cazadores_ordenados(self) -> list[Cazador]:
+        """Devuelve los cazadores ordenados por id (para los listados de la API)."""
+        return sorted(self.cazadores, key=lambda c: c.id)
