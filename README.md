@@ -48,6 +48,18 @@ uvicorn grimcoven_equipos.app:app --reload
 El catálogo se carga y valida una sola vez al arrancar; si los JSON de `data/` no son válidos,
 la aplicación no arranca.
 
+## Páginas web
+
+| Ruta | Descripción |
+|---|---|
+| `/` | Página de inicio con enlaces al selector aleatorio y al recomendador. |
+| `/aleatorio?tamano=N[&semilla=S]` | Formulario para elegir el tamaño del equipo (2–5); muestra el equipo generado como cartas de cazador. |
+| `/recomendador?griefbound=ID&tamano=N` | Formulario con los Griefbound y Pretenders agrupados; muestra los 3 mejores equipos con su puntuación, amenazas y roles cubiertos. |
+
+Sin parámetros, ambas páginas muestran solo el formulario. Los errores (tamaño fuera de rango o
+no numérico, Griefbound inexistente) se muestran en la propia página en lugar de devolver un
+error JSON. El recomendador incluye un aviso de que los datos son inferidos del reglamento.
+
 ## API
 
 | Método | Ruta | Descripción |
@@ -101,7 +113,7 @@ faltan.
 src/grimcoven_equipos/
 ├── app.py              # Fábrica create_app() y app ASGI
 ├── catalogo.py         # Modelos (Pydantic), carga y validación del catálogo
-├── paginas.py          # Páginas HTML
+├── paginas.py          # Páginas HTML (/, /aleatorio, /recomendador)
 ├── api/                # Routers de la API (catálogo y equipos)
 ├── equipos/            # Lógica pura: selector aleatorio y recomendador
 ├── templates/          # Plantillas Jinja2
@@ -133,8 +145,9 @@ propia rama `factory/US-XXX`. El contexto para los agentes está en `.factory/co
 
 ## Estado
 
-Hecho: catálogo, API de consulta, selector aleatorio, recomendador, tema visual y página de
-inicio.
+Todas las historias del backlog (US-001 a US-009) están terminadas: catálogo, API de consulta,
+selector aleatorio, recomendador, tema visual, página de inicio y las páginas web `/aleatorio` y
+`/recomendador`.
 
-Pendiente: las páginas web del selector aleatorio (`/aleatorio`, US-006) y del recomendador
-(`/recomendador`, US-007). La página de inicio ya enlaza a ellas, pero todavía no existen.
+Pendiente: validar las inferencias del catálogo (`roles`, `amenazas`, `contrarresta`) con los
+Hunt Books cuando estén disponibles.
