@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Grimcoven Equipos - Equipo aleatorio{% endblock %}
+
+{% block contenido %}
+<h1>Equipo aleatorio</h1>
+
+<form method="get" action="{{ request.url_for('aleatorio') }}">
+    <label for="tamano">Cazadores en el equipo:</label>
+    <select name="tamano" id="tamano">
+        <option value="2"{% if tamano == 2 %} selected{% endif %}>2</option>
+        <option value="3"{% if tamano == 3 %} selected{% endif %}>3</option>
+        <option value="4"{% if tamano == 4 %} selected{% endif %}>4</option>
+        <option value="5"{% if tamano == 5 %} selected{% endif %}>5</option>
+    </select>
+    <button type="submit">Invocar equipo</button>
+</form>
+
+{% if error %}
+<p class="mensaje-error" role="alert">{{ error }}</p>
+{% endif %}
+
+{% if cazadores %}
+<section class="equipo">
+    {% for cazador in cazadores %}
+    <article class="carta-cazador">
+        <h2 class="nombre-cazador">{{ cazador.nombre }}</h2>
+        <ul class="roles-cazador">
+            {% for rol in cazador.roles %}
+            <li>{{ rol }}</li>
+            {% endfor %}
+        </ul>
+    </article>
+    {% endfor %}
+</section>
+
+<a class="boton-secundario" href="{{ request.url_for('aleatorio') }}?tamano={{ tamano }}">Volver a tirar</a>
+{% endif %}
+{% endblock %}

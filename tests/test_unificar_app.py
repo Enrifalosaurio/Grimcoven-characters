@@ -68,6 +68,7 @@ def test_ca1_equipos_aleatorio_tamano_3_semilla_42(client: TestClient) -> None:
 
 RUTAS_ESPERADAS = {
     "/",
+    "/aleatorio",
     "/api/cazadores",
     "/api/cazadores/{cazador_id}",
     "/api/griefbound",
