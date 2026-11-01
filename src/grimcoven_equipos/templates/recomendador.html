@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Grimcoven Equipos - Recomendador{% endblock %}
+
+{% block contenido %}
+<h1>Recomendador de equipos</h1>
+
+<form class="form-recomendador" method="get" action="{{ request.url_for('recomendador') }}">
+    <label for="griefbound">Griefbound:</label>
+    <select name="griefbound" id="griefbound">
+        <optgroup label="Griefbound">
+            {% for g in griefbound_lista %}
+            <option value="{{ g.id }}"{% if griefbound_id == g.id %} selected{% endif %}>{{ g.nombre }}</option>
+            {% endfor %}
+        </optgroup>
+        <optgroup label="Pretendientes">
+            {% for g in pretendientes_lista %}
+            <option value="{{ g.id }}"{% if griefbound_id == g.id %} selected{% endif %}>{{ g.nombre }}</option>
+            {% endfor %}
+        </optgroup>
+    </select>
+
+    <label for="tamano">Cazadores:</label>
+    <select name="tamano" id="tamano">
+        <option value="2"{% if tamano_valor == '2' %} selected{% endif %}>2</option>
+        <option value="3"{% if tamano_valor == '3' %} selected{% endif %}>3</option>
+        <option value="4"{% if tamano_valor == '4' %} selected{% endif %}>4</option>
+        <option value="5"{% if tamano_valor == '5' %} selected{% endif %}>5</option>
+    </select>
+
+    <button type="submit">Recomendar</button>
+</form>
+
+{% if error %}
+<p class="mensaje-error" role="alert">{{ error }}</p>
+{% endif %}
+
+{% if equipos %}
+<p class="aviso">{{ aviso }}</p>
+
+{% for equipo in equipos %}
+<div class="equipo-recomendado">
+    <h2>Equipo {{ loop.index }}</h2>
+    <p><strong>{{ equipo.puntuacion }} puntos</strong></p>
+    <h3>Cazadores</h3>
+    <ul>
+        {% for c in equipo.cazadores %}
+        <li>{{ c.nombre }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Amenazas cubiertas</h3>
+    <ul>
+        {% for a in equipo.amenazas_cubiertas %}
+        <li>{{ a }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Roles cubiertos</h3>
+    <ul>
+        {% for r in equipo.roles_cubiertos %}
+        <li>{{ r }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
