@@ -75,6 +75,7 @@ RUTAS_ESPERADAS = {
     "/api/griefbound/{griefbound_id}",
     "/api/equipos/aleatorio",
     "/api/equipos/recomendados",
+    "/recomendador",
 }
 
 

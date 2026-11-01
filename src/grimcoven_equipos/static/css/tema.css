@@ -24,9 +24,12 @@ body {
     min-height: 100vh;
 }
 
-h1, h2 {
+h1, h2, h3 {
     font-family: 'MedievalSharp', serif;
     color: var(--color-granate);
+}
+
+h1, h2 {
     border-bottom: 2px solid var(--color-ocre);
     padding-bottom: 0.3em;
 }
@@ -38,6 +41,10 @@ h1 {
 
 h2 {
     font-size: 1.8rem;
+}
+
+h3 {
+    font-size: 1.2rem;
 }
 
 a {
@@ -181,4 +188,28 @@ footer {
     font-size: 0.85rem;
     color: var(--color-tinta);
     opacity: 0.8;
+}
+
+/* Formulario del recomendador: controles apilados a ancho completo */
+.form-recomendador label,
+.form-recomendador select,
+.form-recomendador button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0.75rem;
+}
+
+.form-recomendador button {
+    min-height: 44px;
+    font-family: 'MedievalSharp', serif;
+    font-size: 1.1rem;
+}
+
+/* Mensaje de aviso */
+.aviso {
+    font-style: italic;
+    opacity: 0.85;
+    border-left: 3px solid var(--color-ocre);
+    padding-left: 0.75rem;
 }
