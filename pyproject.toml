@@ -11,6 +11,7 @@ dependencies = [
     "fastapi>=0.115",
     "jinja2>=3.1.6",
     "pydantic>=2.7",
+    "uvicorn>=0.30",
 ]
 
 [project.optional-dependencies]
@@ -26,6 +27,9 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+markers = [
+    "docker: tests que construyen la imagen Docker y arrancan contenedores (se saltan sin Docker)",
+]
 
 [tool.ruff]
 line-length = 100

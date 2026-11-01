@@ -1,0 +1,17 @@
+# Contexto de build minimo: solo pyproject.toml, src/ y data/ entran en la imagen.
+.git
+.github
+.venv
+.factory
+Resources
+tests
+__pycache__
+**/__pycache__
+*.pyc
+*.egg-info
+**/*.egg-info
+.pytest_cache
+.ruff_cache
+.env
+Dockerfile
+.dockerignore
