@@ -11,6 +11,7 @@
     --color-ocre: #b5832a;
     --color-granate: #6e1414;
     --color-tinta: #2a1a12;
+    --color-error-fondo: #f5e6e6;
 }
 
 body {
@@ -81,6 +82,95 @@ nav a:hover {
     max-width: 900px;
     margin: 0 auto;
     padding: 2rem 1.5rem;
+}
+
+button, select {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+    color: var(--color-tinta);
+    background-color: var(--color-pergamino);
+    border: 2px solid var(--color-granate);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--color-granate);
+    color: var(--color-pergamino);
+}
+
+button:focus-visible, select:focus-visible {
+    outline: 2px solid var(--color-granate);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+.equipo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.carta-cazador {
+    border: 2px solid var(--color-granate);
+    border-radius: 4px;
+    padding: 0;
+    flex: 1 1 180px;
+    max-width: 250px;
+    background-color: var(--color-pergamino);
+}
+
+.nombre-cazador {
+    background: var(--color-ocre);
+    color: var(--color-tinta);
+    padding: 0.5rem;
+    margin: 0;
+    font-family: 'MedievalSharp', serif;
+    font-size: 1.3rem;
+    border-bottom: 2px solid var(--color-granate);
+}
+
+.roles-cazador {
+    list-style: none;
+    padding: 0.5rem 1rem;
+    margin: 0;
+}
+
+.roles-cazador li {
+    padding: 0.2rem 0;
+    border-bottom: 1px solid var(--color-ocre);
+}
+
+.roles-cazador li:last-child {
+    border-bottom: none;
+}
+
+.mensaje-error {
+    color: var(--color-granate);
+    font-weight: bold;
+    border: 2px solid var(--color-granate);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-error-fondo);
+}
+
+.boton-secundario {
+    display: inline-block;
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--color-granate);
+    border-radius: 4px;
+    font-family: 'MedievalSharp', serif;
+    font-size: 1.1rem;
+    color: var(--color-granate);
+    text-decoration: none;
+}
+
+.boton-secundario:hover {
+    background-color: var(--color-granate);
+    color: var(--color-pergamino);
 }
 
 footer {
