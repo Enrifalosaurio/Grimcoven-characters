@@ -1,0 +1,94 @@
+/* Tema visual de fantasia oscura para Grimcoven Equipos.
+ *
+ * Colores: pergamino, ocre, granate y tinta.
+ * Tipografia: MedievalSharp (Google Fonts, licencia OFL) + serif fallback.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+:root {
+    --color-pergamino: #e8d8b0;
+    --color-ocre: #b5832a;
+    --color-granate: #6e1414;
+    --color-tinta: #2a1a12;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-pergamino);
+    color: var(--color-tinta);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+h1, h2 {
+    font-family: 'MedievalSharp', serif;
+    color: var(--color-granate);
+    border-bottom: 2px solid var(--color-ocre);
+    padding-bottom: 0.3em;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+a {
+    color: var(--color-granate);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-ocre);
+    transition: color 0.2s, border-color 0.2s;
+}
+
+a:hover {
+    color: #7a5218;
+    border-bottom-color: var(--color-granate);
+}
+
+a:focus-visible {
+    outline: 2px solid var(--color-granate);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+nav {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+nav a {
+    display: inline-block;
+    margin: 0 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--color-granate);
+    border-radius: 4px;
+    font-family: 'MedievalSharp', serif;
+    font-size: 1.1rem;
+}
+
+nav a:hover {
+    background-color: var(--color-granate);
+    color: var(--color-pergamino);
+}
+
+.contenedor {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+    border-top: 2px solid var(--color-ocre);
+    font-size: 0.85rem;
+    color: var(--color-tinta);
+    opacity: 0.8;
+}

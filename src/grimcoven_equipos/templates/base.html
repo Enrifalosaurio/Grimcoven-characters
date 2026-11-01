@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Grimcoven Equipos{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/tema.css">
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    <div class="contenedor">
+        {% block contenido %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>Aplicación no oficial creada por fans. Grimcoven pertenece a sus respectivos propietarios.</p>
+    </footer>
+</body>
+</html>
