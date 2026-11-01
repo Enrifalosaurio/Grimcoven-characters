@@ -73,11 +73,12 @@ RUTAS_ESPERADAS = {
     "/api/griefbound",
     "/api/griefbound/{griefbound_id}",
     "/api/equipos/aleatorio",
+    "/api/equipos/recomendados",
 }
 
 
 def test_ca2_openapi_paths_exactas(client: TestClient) -> None:
-    """CA2: /openapi.json contiene exactamente las rutas de RUTAS_ESPERADAS."""
+    """CA2: /openapi.json contiene exactamente las 6 rutas esperadas."""
     resp = client.get("/openapi.json")
     assert resp.status_code == 200
     paths = set(resp.json()["paths"].keys())
