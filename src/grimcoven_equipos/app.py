@@ -2,15 +2,22 @@
 
 Carga el catalogo de cazadores y Griefbound una sola vez al crear la app (o usa el
 inyectado), lo guarda en ``app.state.catalogo`` y expone los endpoints bajo /api.
+Sirve las paginas HTML y los ficheros estaticos (CSS).
 """
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from grimcoven_equipos.api.catalogo import router as catalogo_router
 from grimcoven_equipos.api.equipos import router as equipos_router
 from grimcoven_equipos.catalogo import Catalogo, cargar_cazadores, cargar_griefbound
+from grimcoven_equipos.paginas import router as paginas_router
+
+_STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 
 def create_app(catalogo: Catalogo | None = None) -> FastAPI:
@@ -28,9 +35,15 @@ def create_app(catalogo: Catalogo | None = None) -> FastAPI:
     application = FastAPI(title="Grimcoven Equipos")
     application.state.catalogo = catalogo
 
-    # Montar todos los routers bajo /api
+    # Ficheros estaticos (CSS, fuentes, etc.)
+    application.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
+
+    # Routers de la API bajo /api
     application.include_router(catalogo_router, prefix="/api")
     application.include_router(equipos_router, prefix="/api")
+
+    # Router de paginas HTML (raiz)
+    application.include_router(paginas_router)
 
     return application
 
