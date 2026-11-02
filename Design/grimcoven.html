@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body>
+<title>Grimcoven Fan Codex</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Cinzel:wght@500;700&display=swap">
+<style>
+/* Layout: a grimoire opened on a hunter's table — candlelit hero, gilt-framed cards, a parchment roster pinned to the right. Single dark world by design. */
+:root{
+  --void:#100F12; --char:#19171C; --char-2:#211E25; --blood:#8F3035; --blood-hi:#B0434A;
+  --gold:#B69A64; --gold-dim:rgba(182,154,100,.38); --gold-faint:rgba(182,154,100,.14);
+  --ivory:#E5DFD2; --ash:#969099; --parch:#2A2420; --parch-ink:#D9CDB4;
+  --f-mark:"UnifrakturMaguntia","IM Fell English SC",Georgia,serif;
+  --f-head:"IM Fell English SC","IM Fell English",Georgia,serif;
+  --f-ital:"IM Fell English",Georgia,serif;
+  --f-body:"Spectral",Georgia,"Times New Roman",serif;
+  --f-num:"Cinzel","IM Fell English SC",Georgia,serif;
+  --gut:max(16px,env(safe-area-inset-left,0px));
+  --gut-r:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--ivory);font-family:var(--f-body);font-size:16px;line-height:1.6;margin:0;
+  background-image:radial-gradient(ellipse at 50% -10%,rgba(143,48,53,.10),transparent 60%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .7 0 0 0 0 .6 0 0 0 0 .45 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--void)}
+a{color:var(--gold)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+h1,h2,h3{text-wrap:balance;font-weight:400;margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
+.eyebrow{font-family:var(--f-head);letter-spacing:.22em;text-transform:uppercase;font-size:.78rem;color:var(--gold)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(16,15,18,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--gold-faint)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:64px}
+.mark{font-family:var(--f-mark);font-size:1.7rem;color:var(--ivory);text-decoration:none;line-height:1;display:flex;align-items:baseline;gap:10px}
+.mark small{font-family:var(--f-head);font-size:.62rem;letter-spacing:.24em;color:var(--ash);text-transform:uppercase}
+.nav ul{list-style:none;display:flex;gap:26px;margin:0 0 0 auto;padding:0}
+.nav ul a{font-family:var(--f-head);font-size:.95rem;letter-spacing:.08em;color:var(--ash);text-decoration:none;padding:6px 0;position:relative;transition:color .3s}
+.nav ul a::after{content:"";position:absolute;left:50%;right:50%;bottom:0;height:1px;background:var(--gold);transition:left .35s,right .35s}
+.nav ul a:hover,.nav ul a[aria-current="page"]{color:var(--ivory)}
+.nav ul a[aria-current="page"]::after,.nav ul a:hover::after{left:0;right:0}
+
+/* ---------- buttons ---------- */
+.btn{--bc:var(--gold);display:inline-flex;align-items:center;gap:10px;font-family:var(--f-head);font-size:1rem;letter-spacing:.12em;text-decoration:none;
+  padding:12px 24px;border:1px solid var(--bc);color:var(--ivory);background:transparent;cursor:pointer;position:relative;transition:background .35s,color .35s,box-shadow .35s;white-space:nowrap}
+.btn::before,.btn::after{content:"";position:absolute;width:6px;height:6px;border:1px solid var(--bc);transform:rotate(45deg);top:50%;margin-top:-3px;background:var(--void)}
+.btn::before{left:-4px}.btn::after{right:-4px}
+.btn:hover{background:var(--gold-faint);box-shadow:0 0 24px rgba(182,154,100,.18)}
+.btn.blood{--bc:var(--blood-hi);background:linear-gradient(180deg,#9a353b,#6e2328);border-color:#b0434a}
+.btn.blood:hover{box-shadow:0 0 28px rgba(176,67,74,.45);background:linear-gradient(180deg,#a83c42,#7a272c)}
+.btn.blood .sh{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.btn.blood .sh::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(90deg,transparent,rgba(229,223,210,.18),transparent);transform:skewX(-20deg);animation:sheen 5s ease-in-out infinite}
+@keyframes sheen{0%,70%{left:-60%}100%{left:130%}}
+.btn.sm{padding:8px 16px;font-size:.85rem}
+.btn[disabled]{opacity:.4;cursor:not-allowed;box-shadow:none}
+.nav .btn{padding:9px 18px;font-size:.85rem}
+
+/* ---------- views ---------- */
+.view{display:none}.view.on{display:block;animation:fadeIn .6s ease}
+@keyframes fadeIn{from{opacity:.25}to{opacity:1}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:min(88vh,820px);display:grid;place-items:center;text-align:center;overflow:hidden;border-bottom:1px solid var(--gold-faint)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-in{position:relative;z-index:2;padding-block:110px 90px;max-width:900px}
+.hero h1{font-family:var(--f-mark);font-size:clamp(4.2rem,14vw,10.5rem);line-height:.9;letter-spacing:.01em;color:var(--ivory);
+  text-shadow:0 0 40px rgba(143,48,53,.55),0 2px 0 #000;animation:rise 1.6s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:.0;letter-spacing:.12em;filter:blur(6px)}to{opacity:1;letter-spacing:.01em;filter:none}}
+.hero .rule{margin:22px auto 26px;width:min(420px,80%)}
+.hero p.tag{font-family:var(--f-ital);font-style:italic;font-size:clamp(1.15rem,2.4vw,1.5rem);color:var(--ivory);opacity:.9;margin:0 0 38px}
+.hero .ctas{display:flex;gap:26px;justify-content:center;flex-wrap:wrap}
+.hero .fan{margin-top:44px;font-size:.75rem;color:var(--ash);letter-spacing:.18em;text-transform:uppercase;font-family:var(--f-head)}
+.scrollcue{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;color:var(--gold);opacity:.6;animation:bob 2.6s ease-in-out infinite;background:none;border:0;cursor:pointer}
+@keyframes bob{50%{transform:translate(-50%,6px)}}
+
+/* ornamental rule */
+.orn{display:block;height:18px;color:var(--gold)}
+.sect{padding-block:110px}
+.sect-head{text-align:center;max-width:680px;margin:0 auto 60px}
+.sect-head h2{font-family:var(--f-head);font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.1;margin:14px 0 18px}
+.sect-head p{color:var(--ash);margin:0}
+
+/* ---------- features ---------- */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.feat{position:relative;padding:44px 32px 36px;background:linear-gradient(180deg,var(--char-2),var(--char));border:1px solid var(--gold-dim);min-width:0;transition:transform .5s,border-color .5s,box-shadow .5s}
+.feat::before{content:"";position:absolute;inset:7px;border:1px solid var(--gold-faint);pointer-events:none}
+.feat:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 24px 50px -20px #000,0 0 40px -18px var(--gold)}
+.feat .sig{width:64px;height:64px;color:var(--gold);margin-bottom:26px}
+.feat h3{font-family:var(--f-head);font-size:1.6rem;margin-bottom:12px}
+.feat p{color:var(--ash);margin:0 0 26px}
+.feat .status{font-family:var(--f-head);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;display:inline-flex;gap:8px;align-items:center}
+.feat .status.live{color:var(--blood-hi)}.feat .status.soon{color:var(--ash)}
+.feat .status.live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blood-hi);box-shadow:0 0 10px var(--blood-hi)}
+.feat.main{border-color:var(--gold)}
+.feat .corner{position:absolute;width:22px;height:22px;color:var(--gold)}
+.feat .corner.tl{top:-1px;left:-1px}.feat .corner.tr{top:-1px;right:-1px;transform:scaleX(-1)}
+.feat .corner.bl{bottom:-1px;left:-1px;transform:scaleY(-1)}.feat .corner.br{bottom:-1px;right:-1px;transform:scale(-1)}
+
+/* ---------- featured ---------- */
+.featured{background:linear-gradient(180deg,transparent,rgba(25,23,28,.85) 20%,rgba(25,23,28,.85) 80%,transparent);}
+.featured .grid{display:grid;grid-template-columns:1fr 1.1fr;gap:70px;align-items:center}
+.featured h2{font-family:var(--f-head);font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.08;margin:14px 0 22px}
+.featured p{color:var(--ash);max-width:48ch}
+.featured ul{list-style:none;padding:0;margin:26px 0 36px;display:grid;gap:12px}
+.featured li{display:flex;gap:12px;align-items:baseline}
+.featured li::before{content:"✠";color:var(--blood-hi);font-size:.85rem}
+.fan-spread{position:relative;height:460px}
+.fan-spread .card{position:absolute;width:230px;left:50%;top:30px;transform-origin:50% 120%;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.fan-spread .card:nth-child(1){transform:translateX(-50%) rotate(-16deg) translateX(-120px)}
+.fan-spread .card:nth-child(2){transform:translateX(-50%) rotate(0deg) translateY(-14px);z-index:2}
+.fan-spread .card:nth-child(3){transform:translateX(-50%) rotate(16deg) translateX(120px)}
+.fan-spread:hover .card:nth-child(1){transform:translateX(-50%) rotate(-21deg) translateX(-150px)}
+.fan-spread:hover .card:nth-child(3){transform:translateX(-50%) rotate(21deg) translateX(150px)}
+.fan-spread .card .actions{display:none}
+
+/* ---------- hunter card ---------- */
+.card{position:relative;background:var(--char);border:1px solid var(--gold-dim);display:flex;flex-direction:column;min-width:0;
+  box-shadow:0 18px 40px -22px #000;transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .4s,box-shadow .4s}
+.card::before{content:"";position:absolute;inset:5px;border:1px solid var(--gold-faint);pointer-events:none;z-index:3}
+.card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 28px 50px -24px #000,0 0 30px -14px rgba(182,154,100,.6)}
+.card .art{position:relative;aspect-ratio:5/5.4;max-width:100%;overflow:hidden;border-bottom:1px solid var(--gold-dim)}
+.card .art svg{display:block;width:100%;height:100%;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.card:hover .art svg{transform:scale(1.05)}
+.card .cls{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--f-head);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 9px;background:rgba(16,15,18,.75);border:1px solid var(--gold-dim);color:var(--gold)}
+.card .ph{position:absolute;top:12px;right:12px;z-index:2;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);font-family:var(--f-head)}
+.card .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-family:var(--f-head);font-size:1.3rem;line-height:1.15}
+.card .arch{font-family:var(--f-ital);font-style:italic;color:var(--gold);font-size:.92rem;margin-top:-6px}
+.card .desc{color:var(--ash);font-size:.88rem;line-height:1.5;margin:0;flex:1}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--gold-faint);border-bottom:1px solid var(--gold-faint)}
+.stats div{text-align:center;padding:7px 0 5px}
+.stats div+div{border-left:1px solid var(--gold-faint)}
+.stats b{display:block;font-family:var(--f-num);font-size:1.25rem;font-weight:500;line-height:1;color:var(--ivory);font-variant-numeric:tabular-nums}
+.stats span{font-family:var(--f-head);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash)}
+.card .actions{display:flex}
+.card .add{flex:1;justify-content:center}
+.card.sel{border-color:var(--blood-hi);box-shadow:0 0 0 1px var(--blood),0 0 34px -8px rgba(176,67,74,.55)}
+.card.sel .art::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,transparent 40%,rgba(143,48,53,.35));pointer-events:none}
+.card .seal{position:absolute;z-index:4;right:12px;top:40px;width:58px;height:58px;display:none;place-items:center;border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,#b0434a,#6a1f24 70%);box-shadow:0 4px 12px #000,inset 0 0 0 3px rgba(0,0,0,.25);font-family:var(--f-mark);font-size:1.7rem;color:#f0d9c6;transform:rotate(-12deg)}
+.card.sel .ph{display:none}.card.sel .seal{display:grid;animation:stamp .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes stamp{from{transform:scale(1.8) rotate(-30deg);opacity:0}to{transform:scale(1) rotate(-12deg);opacity:1}}
+
+/* ---------- team builder ---------- */
+.tb-head{text-align:center;padding-block:76px 46px;position:relative}
+.tb-head h1{font-family:var(--f-head);font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.05;margin:14px 0 16px}
+.tb-head p{color:var(--ash);font-family:var(--f-ital);font-style:italic;font-size:1.15rem;max-width:56ch;margin:0 auto}
+.tb{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:36px;align-items:start;padding-bottom:110px}
+.tools{display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:16px;border:1px solid var(--gold-faint);background:var(--char);margin-bottom:26px}
+.field{position:relative;flex:1 1 220px;min-width:0}
+.field svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ash)}
+.tools input,.tools select{width:100%;background:var(--void);border:1px solid var(--gold-dim);color:var(--ivory);font-family:var(--f-body);font-size:.95rem;padding:10px 12px 10px 38px;border-radius:0;appearance:none}
+.tools select{padding-left:12px;padding-right:32px;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;background-size:5px 5px;background-repeat:no-repeat;cursor:pointer}
+.tools input:focus,.tools select:focus{border-color:var(--gold);outline:none}
+.sortf{flex:0 1 200px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;flex-basis:100%}
+.chip{font-family:var(--f-head);font-size:.8rem;letter-spacing:.12em;padding:6px 14px;border:1px solid var(--gold-faint);background:transparent;color:var(--ash);cursor:pointer;transition:all .3s}
+.chip:hover{color:var(--ivory);border-color:var(--gold-dim)}
+.chip[aria-pressed="true"]{color:var(--void);background:var(--gold);border-color:var(--gold)}
+.chip .n{font-family:var(--f-num);font-size:.72rem;margin-left:6px;opacity:.7}
+.meta-row{display:flex;justify-content:space-between;gap:12px;color:var(--ash);font-size:.85rem;margin:-8px 0 18px;flex-wrap:wrap}
+.roster{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px}
+.empty{grid-column:1/-1;text-align:center;padding:60px 20px;border:1px dashed var(--gold-dim);color:var(--ash);font-family:var(--f-ital);font-style:italic}
+
+/* ritual roster panel */
+.panel{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);background:linear-gradient(180deg,#2a2420,#1f1a17);border:1px solid var(--gold);color:var(--parch-ink);
+  box-shadow:0 30px 70px -30px #000,inset 0 0 60px rgba(0,0,0,.55);padding:26px 22px 22px;min-width:0}
+.panel::before{content:"";position:absolute;inset:6px;border:1px solid var(--gold-dim);pointer-events:none}
+.panel::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.035' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .14 0 0 0 0 .08 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E")}
+.panel>*{position:relative;z-index:1}
+.panel h2{font-family:var(--f-head);font-size:1.6rem;text-align:center;color:var(--ivory);line-height:1.1}
+.panel .sub{text-align:center;font-family:var(--f-ital);font-style:italic;color:var(--gold);font-size:.9rem;margin:4px 0 14px}
+.capacity{display:flex;align-items:center;justify-content:center;gap:14px;margin:6px 0 4px}
+.candles{display:flex;gap:10px}
+.candle{width:16px;height:34px;position:relative}
+.candle i{position:absolute;bottom:0;left:4px;width:8px;height:20px;background:linear-gradient(90deg,#5c544a,#8a8072 50%,#5c544a);border-radius:1px}
+.candle b{position:absolute;bottom:20px;left:5px;width:6px;height:11px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 50% 70%,#fff2c8,#e0a64a 55%,#b0434a);opacity:0;transform:scale(.3);transform-origin:50% 100%;transition:opacity .4s,transform .4s;filter:drop-shadow(0 0 6px #e0a64a)}
+.candle.lit b{opacity:1;transform:scale(1);animation:flick 2.2s ease-in-out infinite}
+.candle.lit:nth-child(2n) b{animation-delay:-.7s}.candle.lit:nth-child(3n) b{animation-delay:-1.3s}
+@keyframes flick{0%,100%{transform:scale(1) skewX(0)}30%{transform:scale(.92,1.06) skewX(-4deg)}60%{transform:scale(1.04,.95) skewX(3deg)}}
+.count{font-family:var(--f-num);font-size:1.6rem;color:var(--ivory);font-variant-numeric:tabular-nums;line-height:1}
+.count small{font-size:.9rem;color:var(--ash)}
+.capset{display:flex;align-items:center;justify-content:center;gap:10px;font-size:.78rem;color:var(--ash);margin:8px 0 16px;flex-wrap:wrap}
+.step{display:inline-flex;border:1px solid var(--gold-dim)}
+.step button{background:transparent;border:0;width:28px;height:26px;cursor:pointer;color:var(--gold)}
+.step button:hover{background:var(--gold-faint)}
+.step output{font-family:var(--f-num);min-width:24px;text-align:center;line-height:26px;color:var(--ivory);border-inline:1px solid var(--gold-dim)}
+.slots{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.slot{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px;border:1px solid var(--gold-dim);background:rgba(16,15,18,.55);animation:slotIn .5s cubic-bezier(.2,.7,.2,1)}
+.slot.out{animation:slotOut .35s ease forwards}
+@keyframes slotIn{from{opacity:0;transform:translateX(18px);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+@keyframes slotOut{to{opacity:0;transform:translateX(-18px);filter:blur(4px)}}
+.slot .pt{width:54px;height:58px;border:1px solid var(--gold-dim);overflow:hidden}
+.slot .pt svg{width:100%;height:100%;display:block}
+.slot .nm{font-family:var(--f-head);color:var(--ivory);font-size:1rem;line-height:1.15;overflow-wrap:anywhere}
+.slot .c{font-family:var(--f-ital);font-style:italic;color:var(--gold);font-size:.8rem}
+.slot .mini{font-family:var(--f-num);font-size:.72rem;color:var(--ash);letter-spacing:.06em;font-variant-numeric:tabular-nums;margin-top:2px}
+.slot .rm{background:transparent;border:1px solid transparent;color:var(--ash);width:32px;height:32px;cursor:pointer;display:grid;place-items:center;transition:all .25s}
+.slot .rm:hover{color:var(--blood-hi);border-color:var(--blood)}
+.slot.vacant{grid-template-columns:54px 1fr;border-style:dashed;border-color:var(--gold-faint);background:transparent;animation:none}
+.slot.vacant .pt{border-style:dashed;border-color:var(--gold-faint);display:grid;place-items:center;color:var(--gold-dim);font-family:var(--f-num)}
+.slot.vacant .nm{color:var(--ash);font-family:var(--f-ital);font-style:italic;font-size:.9rem}
+.summary{margin-top:20px;padding-top:16px;border-top:1px solid var(--gold-dim)}
+.summary h3{font-family:var(--f-head);font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;justify-content:space-between}
+.summary h3 span{color:var(--ash);letter-spacing:.06em;text-transform:none;font-family:var(--f-ital);font-style:italic}
+.bars{display:grid;gap:9px}
+.bar{display:grid;grid-template-columns:70px 1fr 30px;gap:10px;align-items:center;font-size:.78rem}
+.bar span{font-family:var(--f-head);letter-spacing:.12em;text-transform:uppercase;color:var(--ash)}
+.bar .tr{height:6px;background:rgba(16,15,18,.7);border:1px solid var(--gold-faint);position:relative}
+.bar .tr i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--blood),var(--gold));transition:width .7s cubic-bezier(.2,.7,.2,1)}
+.bar b{font-family:var(--f-num);font-weight:500;text-align:right;color:var(--ivory);font-variant-numeric:tabular-nums}
+.note{font-size:.72rem;color:var(--ash);font-style:italic;margin:10px 0 0}
+.p-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.p-actions .btn{justify-content:center;padding:10px 8px;font-size:.8rem}
+.p-actions .full{grid-column:1/-1}
+.linkish{background:none;border:0;color:var(--ash);font-size:.8rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer;justify-self:center;grid-column:1/-1}
+.linkish:hover{color:var(--blood-hi)}
+.confirm{grid-column:1/-1;display:flex;gap:10px;align-items:center;justify-content:center;font-size:.85rem;flex-wrap:wrap}
+.reading{margin-top:16px;padding:14px 16px;border:1px solid var(--gold-dim);background:rgba(16,15,18,.6);font-size:.88rem;line-height:1.55;animation:slotIn .5s}
+.reading h4{margin:0 0 6px;font-family:var(--f-head);font-weight:400;color:var(--ivory);font-size:1.05rem}
+.reading p{margin:0 0 8px;color:var(--parch-ink)}
+.reading code{display:block;font-family:var(--f-num);font-size:.78rem;color:var(--gold);word-break:break-all;background:rgba(0,0,0,.35);padding:8px;margin-top:6px}
+
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);opacity:0;z-index:80;background:var(--char);border:1px solid var(--gold);padding:10px 20px;font-family:var(--f-head);letter-spacing:.06em;transition:all .35s;pointer-events:none;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.mobibar{display:none}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--gold-faint);padding-block:56px 40px;background:var(--void)}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:40px}
+footer .mark{font-size:2rem}
+footer p{color:var(--ash);font-size:.85rem;max-width:58ch}
+footer nav{display:flex;gap:22px;justify-content:flex-end;flex-wrap:wrap;align-items:flex-start}
+footer nav a{font-family:var(--f-head);color:var(--ash);text-decoration:none;letter-spacing:.08em}
+footer nav a:hover{color:var(--gold)}
+footer .fine{grid-column:1/-1;border-top:1px solid var(--gold-faint);padding-top:18px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.75rem;color:var(--ash)}
+
+/* about */
+.about{max-width:720px;margin:0 auto;padding-block:20px 100px}
+.about p{color:var(--ash)}
+.about dl{display:grid;grid-template-columns:max-content 1fr;gap:10px 22px;margin:26px 0;padding:22px;border:1px solid var(--gold-faint);background:var(--char)}
+.about dt{font-family:var(--f-head);color:var(--gold);letter-spacing:.1em}
+.about dd{margin:0;color:var(--ivory)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1020px){
+  .tb{grid-template-columns:1fr}
+  .panel{position:relative;top:0}
+  .featured .grid{grid-template-columns:1fr;gap:30px}
+  .mobibar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:55;align-items:center;justify-content:space-between;gap:12px;
+    padding:10px var(--gut-r) calc(10px + env(safe-area-inset-bottom,0px)) var(--gut);background:rgba(25,23,28,.96);border-top:1px solid var(--gold-dim);backdrop-filter:blur(6px)}
+  .mobibar .count{font-size:1.2rem}
+  #view-builder.on ~ footer{padding-bottom:110px}
+}
+@media (max-width:860px){
+  .feats{grid-template-columns:1fr}
+  .nav ul{gap:16px}
+  .nav ul li.opt{display:none}
+  .nav .btn{display:none}
+}
+@media (max-width:560px){
+  .nav .wrap{gap:12px}
+  .mark small{display:none}
+  .mark{font-size:1.45rem}
+  .nav ul{gap:14px}.nav ul a{font-size:.85rem}
+  .sect{padding-block:76px}
+  .fan-spread{height:360px}
+  .fan-spread .card{width:170px}
+  .fan-spread .card:nth-child(1){transform:translateX(-50%) rotate(-14deg) translateX(-78px)}
+  .fan-spread .card:nth-child(3){transform:translateX(-50%) rotate(14deg) translateX(78px)}
+  .fan-spread .card .desc,.fan-spread .card .stats span{display:none}
+  .roster{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .roster .card .art{aspect-ratio:1/1}
+  .roster .card .body{padding:12px 12px 12px;gap:8px}
+  .roster .card h3{font-size:1.05rem}
+  .roster .card .desc{display:none}
+  .roster .card .stats b{font-size:1rem}
+  .roster .card .stats span{font-size:.52rem;letter-spacing:.08em}
+  .roster .card .btn{padding:8px 6px;font-size:.74rem;letter-spacing:.06em}
+  .roster .card .btn::before,.roster .card .btn::after{display:none}
+  .roster .card .cls{font-size:.56rem;top:8px;left:8px;padding:3px 6px}
+  .roster .card .ph{display:none}
+  .card .seal{width:40px;height:40px;font-size:1.1rem;right:8px;top:8px}
+  .sortf{flex:1 1 100%}
+  footer .wrap{grid-template-columns:1fr}
+  footer nav{justify-content:flex-start}
+  .hero .ctas .btn{width:100%;justify-content:center}
+}
+@media (max-width:360px){.roster{grid-template-columns:1fr}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="orn" viewBox="0 0 420 18"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M0 9h170M250 9h170"/><path d="M170 9l10-6 10 6-10 6z"/><path d="M230 9l10-6 10 6-10 6z"/><circle cx="210" cy="9" r="6"/><circle cx="210" cy="9" r="2" fill="currentColor"/><path d="M190 9h14M216 9h14"/><path d="M40 9l6-3M40 9l6 3M380 9l-6-3M380 9l-6 3" opacity=".6"/></g></symbol>
+    <symbol id="corner" viewBox="0 0 22 22"><path d="M1 21V1h20" fill="none" stroke="currentColor"/><path d="M5 1v4H1" fill="none" stroke="currentColor"/><circle cx="5" cy="5" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="x" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.3"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="mark" href="#home" data-route="home">Grimcoven <small>Fan Codex</small></a>
+    <ul>
+      <li><a href="#home" data-route="home">Home</a></li>
+      <li><a href="#team-builder" data-route="team-builder">Team Builder</a></li>
+      <li class="opt"><a href="#about" data-route="about">About</a></li>
+    </ul>
+    <a class="btn blood sm" href="#team-builder" data-route="team-builder"><span class="sh"></span>Forge a Coven</a>
+  </div>
+</header>
+
+<main>
+<!-- ================= HOME ================= -->
+<section class="view" id="view-home">
+  <div class="hero">
+    <canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-in wrap">
+      <div class="eyebrow">An unofficial companion for the hunt</div>
+      <h1>Grimcoven</h1>
+      <svg class="orn rule" aria-hidden="true"><use href="#orn"/></svg>
+      <p class="tag">Gather your allies. Embrace the darkness. Forge your destiny.</p>
+      <div class="ctas">
+        <a class="btn blood" href="#team-builder" data-route="team-builder"><span class="sh"></span>Build Your Team</a>
+        <button class="btn" type="button" data-scroll="features">Explore Grimcoven</button>
+      </div>
+      <div class="fan">Fan-made · Not affiliated with the publisher</div>
+    </div>
+    <button class="scrollcue" type="button" data-scroll="features" aria-label="Scroll to features">
+      <svg width="20" height="28" viewBox="0 0 20 28" fill="none" stroke="currentColor"><path d="M10 1v24M3 18l7 7 7-7"/></svg>
+    </button>
+  </div>
+
+  <section class="sect" id="features">
+    <div class="wrap">
+      <div class="sect-head">
+        <div class="eyebrow">What lies within</div>
+        <h2>Tools for those who hunt in the dark</h2>
+        <p>A fan codex for planning your table: build a coven, study its strengths, and soon, trade notes with other hunters.</p>
+      </div>
+      <div class="feats">
+        <article class="feat main">
+          <svg class="corner tl"><use href="#corner"/></svg><svg class="corner tr"><use href="#corner"/></svg><svg class="corner bl"><use href="#corner"/></svg><svg class="corner br"><use href="#corner"/></svg>
+          <svg class="sig" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="32" cy="32" r="29"/><circle cx="32" cy="32" r="22" stroke-dasharray="2 4"/><path d="M32 6l7 20h-14zM32 58l-7-20h14zM6 32l20-7v14zM58 32l-20 7V25z"/><circle cx="32" cy="32" r="5" fill="currentColor" opacity=".35"/></svg>
+          <h3>Team Builder</h3>
+          <p>Create and customize your own teams using characters from Grimcoven.</p>
+          <span class="status live">Open now</span>
+        </article>
+        <article class="feat">
+          <svg class="corner tl"><use href="#corner"/></svg><svg class="corner tr"><use href="#corner"/></svg><svg class="corner bl"><use href="#corner"/></svg><svg class="corner br"><use href="#corner"/></svg>
+          <svg class="sig" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M10 12h20c2 0 2 2 2 2v40s0-3-3-3H10zM54 12H34c-2 0-2 2-2 2v40s0-3 3-3h19z"/><path d="M15 20h11M15 26h11M15 32h8M38 20h11M38 26h11M38 32h8" opacity=".6"/><circle cx="43" cy="42" r="4"/></svg>
+          <h3>Character Compendium</h3>
+          <p>Explore the characters, their abilities and their unique characteristics.</p>
+          <span class="status soon">In preparation</span>
+        </article>
+        <article class="feat">
+          <svg class="corner tl"><use href="#corner"/></svg><svg class="corner tr"><use href="#corner"/></svg><svg class="corner bl"><use href="#corner"/></svg><svg class="corner br"><use href="#corner"/></svg>
+          <svg class="sig" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M32 8v10M24 18h16"/><path d="M14 56c0-10 8-18 18-18s18 8 18 18"/><circle cx="32" cy="30" r="8"/><circle cx="12" cy="36" r="5" opacity=".6"/><circle cx="52" cy="36" r="5" opacity=".6"/><path d="M4 56c0-6 3-10 8-10M60 56c0-6-3-10-8-10" opacity=".6"/></svg>
+          <h3>Community</h3>
+          <p>Share your creations and discover other players' teams.</p>
+          <span class="status soon">In preparation</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect featured">
+    <div class="wrap grid">
+      <div>
+        <div class="eyebrow">The Team Builder</div>
+        <h2>Lay your hunters on the table before the hunt begins</h2>
+        <p>Pick from the roster, watch the candles light as your coven fills, and read how its strengths add up before you set out.</p>
+        <ul>
+          <li>Search, filter by archetype and sort by any attribute</li>
+          <li>Set the coven size to match your table</li>
+          <li>Generate a composition reading and a shareable team code</li>
+        </ul>
+        <a class="btn blood" href="#team-builder" data-route="team-builder"><span class="sh"></span>Open the Team Builder</a>
+      </div>
+      <div class="fan-spread" id="fanSpread" aria-hidden="true"></div>
+    </div>
+  </section>
+</section>
+
+<!-- ================= TEAM BUILDER ================= -->
+<section class="view" id="view-team-builder">
+  <div class="tb-head wrap">
+    <div class="eyebrow">Team Builder</div>
+    <h1>Forge Your Fellowship</h1>
+    <p>Choose your warriors, combine their strengths and prepare your party for the darkness ahead.</p>
+    <svg class="orn" style="width:min(420px,80%);margin:28px auto 0" aria-hidden="true"><use href="#orn"/></svg>
+  </div>
+
+  <div class="wrap tb">
+    <div style="min-width:0">
+      <div class="tools" role="search">
+        <div class="field">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+          <label for="q" class="sr" style="position:absolute;left:-9999px">Search hunters</label>
+          <input id="q" type="search" placeholder="Search hunters by name or trait" autocomplete="off">
+        </div>
+        <div class="field sortf">
+          <label for="sort" style="position:absolute;left:-9999px">Sort</label>
+          <select id="sort">
+            <option value="name">Sort: Name (A–Z)</option>
+            <option value="might">Sort: Might</option>
+            <option value="grit">Sort: Grit</option>
+            <option value="wits">Sort: Wits</option>
+            <option value="resolve">Sort: Resolve</option>
+            <option value="total">Sort: Total attributes</option>
+          </select>
+        </div>
+        <div class="chips" id="chips" role="group" aria-label="Filter by archetype"></div>
+      </div>
+      <div class="meta-row"><span id="shown"></span><span>Illustrative placeholder hunters · not official game data</span></div>
+      <div class="roster" id="roster"></div>
+    </div>
+
+    <aside class="panel" id="panel" aria-labelledby="panelTitle">
+      <h2 id="panelTitle">The Coven Roll</h2>
+      <div class="sub">Names inscribed here ride together</div>
+      <div class="capacity">
+        <div class="candles" id="candles" aria-hidden="true"></div>
+        <div class="count" id="count" aria-live="polite">0<small> / 4</small></div>
+      </div>
+      <div class="capset">
+        <span>Coven size</span>
+        <span class="step"><button type="button" id="capMinus" aria-label="Decrease coven size">−</button><output id="capOut">4</output><button type="button" id="capPlus" aria-label="Increase coven size">+</button></span>
+        <span>· set to your table</span>
+      </div>
+      <ul class="slots" id="slots"></ul>
+
+      <div class="summary">
+        <h3>Combined Attributes <span id="sumMembers">0 members</span></h3>
+        <div class="bars" id="bars"></div>
+        <p class="note">Attributes are illustrative placeholders, not rules from the game.</p>
+      </div>
+
+      <div class="p-actions" id="pActions">
+        <button class="btn full blood" type="button" id="btnRead"><span class="sh"></span>Read the Composition</button>
+        <button class="btn" type="button" id="btnShare">Share Coven</button>
+        <button class="btn" type="button" id="btnExport">Export</button>
+        <button class="linkish" type="button" id="btnClear">Clear the roll</button>
+      </div>
+      <div id="reading"></div>
+    </aside>
+  </div>
+  <div class="mobibar">
+    <div><span class="eyebrow" style="font-size:.66rem">Coven</span><div class="count" id="mCount">0<small> / 4</small></div></div>
+    <button class="btn sm" type="button" id="toPanel">View the Roll</button>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="view" id="view-about">
+  <div class="tb-head wrap">
+    <div class="eyebrow">About this codex</div>
+    <h1>A fan's grimoire</h1>
+  </div>
+  <div class="about wrap">
+    <p>This is an unofficial, fan-made companion for <em>Grimcoven</em>, the cooperative boss-battler set in a dark Victorian world, designed by Krzysztof Belczyk and published by Awaken Realms. It is not endorsed by, or affiliated with, the publisher.</p>
+    <dl>
+      <dt>Players</dt><dd>1–4 (some editions list 1–5)</dd>
+      <dt>Hunters</dt><dd>Six in the core box</dd>
+      <dt>Foes</dt><dd>Griefbound bosses, elites and minions</dd>
+      <dt>Ages</dt><dd>14+</dd>
+    </dl>
+    <p>The hunters shown in the Team Builder are illustrative placeholders. Their names, archetypes, attributes and portraits were made for this prototype and are not taken from the game. Coven size is adjustable so you can match it to the number of players at your table.</p>
+    <a class="btn blood" href="#team-builder" data-route="team-builder"><span class="sh"></span>Build Your Team</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="mark" href="#home" data-route="home">Grimcoven <small>Fan Codex</small></a>
+      <p>An unofficial fan project. Grimcoven and all related names and artwork belong to their respective owners. This site is not affiliated with or endorsed by Awaken Realms. Hunter data shown here is illustrative.</p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="#home" data-route="home">Home</a>
+      <a href="#team-builder" data-route="team-builder">Team Builder</a>
+      <a href="#about" data-route="about">About</a>
+    </nav>
+    <div class="fine"><span>Made by a fan, for the table.</span><svg class="orn" style="width:160px" aria-hidden="true"><use href="#orn"/></svg><span>Only the hunt matters.</span></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+/* ---------------- placeholder data ---------------- */
+const STATS=["might","grit","wits","resolve"];
+const H=[
+ {id:"duelist",name:"The Ashen Duelist",cls:"Blade",arch:"Duelist",might:5,grit:3,wits:3,resolve:2,hat:"top",wpn:"sword",hue:"#8F3035",desc:"A swift fighter who closes distance and strikes first. Placeholder profile for layout."},
+ {id:"warden",name:"The Lantern Warden",cls:"Bulwark",arch:"Guardian",might:3,grit:5,wits:2,resolve:4,hat:"hood",wpn:"lantern",hue:"#B69A64",desc:"Holds the line and keeps others standing when the dark presses in."},
+ {id:"marksman",name:"The Fog Marksman",cls:"Marksman",arch:"Ranged",might:3,grit:2,wits:5,resolve:3,hat:"brim",wpn:"rifle",hue:"#5d6f7a",desc:"Strikes from range and picks apart threats before they reach the coven."},
+ {id:"occultist",name:"The Hollow Occultist",cls:"Occult",arch:"Ritualist",might:2,grit:2,wits:5,resolve:5,hat:"hood",wpn:"staff",hue:"#6b4a7a",desc:"Bends forbidden rites to the hunt's purpose, at a cost to the self."},
+ {id:"surgeon",name:"The Iron Surgeon",cls:"Support",arch:"Mender",might:2,grit:4,wits:4,resolve:3,hat:"beak",wpn:"blade",hue:"#4a6b5c",desc:"Patches wounds between blows and keeps the coven in the fight."},
+ {id:"zealot",name:"The Bell Zealot",cls:"Blade",arch:"Zealot",might:5,grit:4,wits:1,resolve:4,hat:"none",wpn:"hammer",hue:"#9a5a32",desc:"Charges into the fray with heavy blows and unshaken conviction."},
+ {id:"widow",name:"The Thorn Widow",cls:"Occult",arch:"Hexer",might:2,grit:3,wits:4,resolve:5,hat:"veil",wpn:"staff",hue:"#4b3a52",desc:"Lays curses that weaken the quarry and open it to the coven's blades."},
+ {id:"chemist",name:"The Vitriol Chemist",cls:"Support",arch:"Alchemist",might:3,grit:3,wits:5,resolve:2,hat:"brim",wpn:"flask",hue:"#6d7a3a",desc:"Brews volatile tinctures to burn foes and steady allies."},
+ {id:"sentinel",name:"The Grave Sentinel",cls:"Bulwark",arch:"Guardian",might:4,grit:5,wits:2,resolve:3,hat:"top",wpn:"hammer",hue:"#5a5560",desc:"A patient wall of iron who draws the beast's fury away from others."},
+ {id:"hound",name:"The Moor Houndmaster",cls:"Marksman",arch:"Tracker",might:4,grit:3,wits:4,resolve:2,hat:"brim",wpn:"rifle",hue:"#7a5a3a",desc:"Tracks the quarry across the arena and strikes where it is weakest."}
+];
+const CLASSES=["All",...new Set(H.map(h=>h.cls))];
+const byId=Object.fromEntries(H.map(h=>[h.id,h]));
+
+/* ---------------- portrait generator ---------------- */
+function seed(s){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return()=>((h=(h*1103515245+12345)|0)>>>0)/4294967296}
+function portrait(h){
+  const r=seed(h.id), id="g"+h.id+(portrait.n=(portrait.n||0)+1);
+  const hats={
+    top:'<path d="M78 84h44v-34h-44z" fill="#0a090b"/><path d="M64 86h72" stroke="#0a090b" stroke-width="7" stroke-linecap="round"/><path d="M78 76h44" stroke="'+h.hue+'" stroke-width="3" opacity=".9"/>',
+    brim:'<path d="M84 86c0-18 32-18 32 0" fill="#0a090b"/><ellipse cx="100" cy="88" rx="42" ry="7" fill="#0a090b"/>',
+    hood:'<path d="M100 52c-30 0-38 36-36 66 8-14 20-22 36-22s28 8 36 22c2-30-6-66-36-66z" fill="#0a090b"/>',
+    beak:'<path d="M84 84c0-18 32-18 32 0" fill="#0a090b"/><ellipse cx="100" cy="86" rx="38" ry="6" fill="#0a090b"/><path d="M104 100l34 22-30-8z" fill="#0a090b"/>',
+    veil:'<path d="M100 60c-22 0-30 22-32 60h64c-2-38-10-60-32-60z" fill="#0a090b" opacity=".92"/><path d="M76 74h48" stroke="'+h.hue+'" stroke-width="2"/>',
+    none:''
+  };
+  const wpns={
+    sword:'<path d="M150 70l-6 120" stroke="#c9c2b4" stroke-width="3"/><path d="M138 176h16" stroke="#0a090b" stroke-width="6"/>',
+    lantern:'<path d="M48 120v26" stroke="#0a090b" stroke-width="3"/><rect x="38" y="146" width="20" height="26" fill="#0a090b"/><rect x="42" y="150" width="12" height="18" fill="#f2c26b"/><circle cx="48" cy="159" r="26" fill="url(#l'+id+')"/>',
+    rifle:'<path d="M40 190L162 70" stroke="#0a090b" stroke-width="6" stroke-linecap="round"/><path d="M150 82l14-14" stroke="#c9c2b4" stroke-width="2"/>',
+    staff:'<path d="M152 64v150" stroke="#0a090b" stroke-width="5"/><circle cx="152" cy="62" r="9" fill="none" stroke="'+h.hue+'" stroke-width="2"/><circle cx="152" cy="62" r="18" fill="url(#l'+id+')"/>',
+    blade:'<path d="M54 150l-14-40" stroke="#c9c2b4" stroke-width="2"/><path d="M58 160l-6-14" stroke="#0a090b" stroke-width="5"/>',
+    hammer:'<path d="M150 80v130" stroke="#0a090b" stroke-width="6"/><rect x="134" y="66" width="34" height="20" fill="#0a090b"/>',
+    flask:'<path d="M44 150h16l6 24H38z" fill="#0a090b"/><circle cx="52" cy="166" r="6" fill="#b6d36a"/><circle cx="52" cy="166" r="22" fill="url(#l'+id+')"/>'
+  };
+  let stars="";for(let i=0;i<14;i++)stars+='<circle cx="'+(r()*200).toFixed(1)+'" cy="'+(r()*110).toFixed(1)+'" r="'+(r()*.9+.2).toFixed(2)+'" fill="#E5DFD2" opacity="'+(r()*.5+.1).toFixed(2)+'"/>';
+  let spires="";let x=-10;while(x<210){const w=10+r()*18,hh=20+r()*50;spires+='<path d="M'+x.toFixed(1)+' 240V'+(190-hh).toFixed(1)+'l'+(w/2).toFixed(1)+' -'+(10+r()*14).toFixed(1)+'l'+(w/2).toFixed(1)+' '+(10+r()*14).toFixed(1)+'V240z"/>';x+=w+r()*6}
+  const mx=(60+r()*80).toFixed(0);
+  return '<svg viewBox="0 0 200 216" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Placeholder portrait: '+h.name+'"><defs>'+
+   '<radialGradient id="b'+id+'" cx="50%" cy="38%" r="75%"><stop offset="0" stop-color="'+h.hue+'" stop-opacity=".55"/><stop offset=".55" stop-color="#19171C"/><stop offset="1" stop-color="#0c0b0d"/></radialGradient>'+
+   '<radialGradient id="l'+id+'"><stop offset="0" stop-color="#f2c26b" stop-opacity=".55"/><stop offset="1" stop-color="#f2c26b" stop-opacity="0"/></radialGradient>'+
+   '<linearGradient id="f'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#100F12" stop-opacity="0"/><stop offset="1" stop-color="#100F12" stop-opacity=".95"/></linearGradient></defs>'+
+   '<rect width="200" height="216" fill="url(#b'+id+')"/>'+stars+
+   '<circle cx="'+mx+'" cy="46" r="20" fill="#E5DFD2" opacity=".14"/><circle cx="'+mx+'" cy="46" r="13" fill="#E5DFD2" opacity=".22"/>'+
+   '<g fill="#141216" opacity=".9">'+spires+'</g>'+
+   '<circle cx="100" cy="98" r="54" fill="none" stroke="#B69A64" stroke-opacity=".35"/><circle cx="100" cy="98" r="62" fill="none" stroke="#B69A64" stroke-opacity=".15" stroke-dasharray="1 5"/>'+
+   '<path d="M30 216c4-50 30-82 70-82s66 32 70 82z" fill="#0a090b"/>'+
+   '<path d="M86 134l14 30 14-30" fill="none" stroke="'+h.hue+'" stroke-width="2" opacity=".8"/>'+
+   '<ellipse cx="100" cy="104" rx="19" ry="23" fill="#0a090b"/>'+hats[h.hat]+wpns[h.wpn]+
+   '<path d="M92 104h5M103 104h5" stroke="'+h.hue+'" stroke-width="1.6" opacity=".9"/>'+
+   '<rect width="200" height="216" fill="url(#f'+id+')" opacity=".55"/></svg>';
+}
+
+/* ---------------- card markup ---------------- */
+function statsHTML(h){return '<div class="stats">'+STATS.map(s=>'<div><b>'+h[s]+'</b><span>'+s+'</span></div>').join("")+'</div>'}
+function cardHTML(h,sel){
+  return '<article class="card'+(sel?' sel':'')+'" data-id="'+h.id+'">'+
+   '<div class="art">'+portrait(h)+'<span class="cls">'+h.cls+'</span><span class="ph">Placeholder</span></div>'+
+   '<div class="seal" aria-hidden="true">G</div>'+
+   '<div class="body"><h3>'+h.name+'</h3><div class="arch">'+h.arch+'</div><p class="desc">'+h.desc+'</p>'+statsHTML(h)+
+   '<div class="actions"><button class="btn sm add" type="button" data-add="'+h.id+'"'+(sel?' aria-pressed="true"':'')+'>'+(sel?'In the Coven ✓':'Add to Coven')+'</button></div></div></article>';
+}
+
+/* ---------------- state ---------------- */
+const st={team:[],cap:4,q:"",cls:"All",sort:"name",reading:false,confirm:false};
+try{const s=JSON.parse(localStorage.getItem("gc-coven")||"null");if(s){st.team=(s.team||[]).filter(id=>byId[id]);st.cap=Math.min(5,Math.max(1,s.cap||4));st.team=st.team.slice(0,st.cap)}}catch(e){}
+function save(){try{localStorage.setItem("gc-coven",JSON.stringify({team:st.team,cap:st.cap}))}catch(e){}}
+const $=s=>document.querySelector(s);
+const toast=(m)=>{const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),2200)};
+
+/* ---------------- roster ---------------- */
+function renderChips(){
+  $("#chips").innerHTML=CLASSES.map(c=>{const n=c==="All"?H.length:H.filter(h=>h.cls===c).length;return '<button class="chip" type="button" data-cls="'+c+'" aria-pressed="'+(st.cls===c)+'">'+c+'<span class="n">'+n+'</span></button>'}).join("");
+}
+function renderRoster(){
+  const q=st.q.trim().toLowerCase();
+  let list=H.filter(h=>(st.cls==="All"||h.cls===st.cls)&&(!q||(h.name+" "+h.arch+" "+h.cls+" "+h.desc).toLowerCase().includes(q)));
+  const tot=h=>STATS.reduce((a,s)=>a+h[s],0);
+  list.sort((a,b)=>st.sort==="name"?a.name.localeCompare(b.name):st.sort==="total"?tot(b)-tot(a):b[st.sort]-a[st.sort]);
+  $("#roster").innerHTML=list.length?list.map(h=>cardHTML(h,st.team.includes(h.id))).join(""):'<div class="empty">No hunter answers to that name. Try another word or clear the filter.</div>';
+  $("#shown").textContent=list.length+" of "+H.length+" hunters shown";
+  if(st.team.length>=st.cap)document.querySelectorAll("#roster [data-add]:not([aria-pressed])").forEach(b=>{b.textContent="Coven Full";b.disabled=true});
+}
+
+/* ---------------- panel ---------------- */
+function renderPanel(){
+  const n=st.team.length;
+  $("#candles").innerHTML=Array.from({length:st.cap},(_,i)=>'<span class="candle'+(i<n?' lit':'')+'"><b></b><i></i></span>').join("");
+  const ct=n+'<small> / '+st.cap+'</small>';$("#count").innerHTML=ct;$("#mCount").innerHTML=ct;
+  $("#capOut").textContent=st.cap;
+  let html=st.team.map(id=>{const h=byId[id];return '<li class="slot" data-slot="'+id+'"><div class="pt">'+portrait(h)+'</div><div><div class="nm">'+h.name+'</div><div class="c">'+h.cls+' · '+h.arch+'</div><div class="mini">MGT '+h.might+' · GRT '+h.grit+' · WIT '+h.wits+' · RSV '+h.resolve+'</div></div><button class="rm" type="button" data-rm="'+id+'" aria-label="Remove '+h.name+'"><svg width="14" height="14"><use href="#x"/></svg></button></li>'}).join("");
+  for(let i=n;i<st.cap;i++)html+='<li class="slot vacant"><div class="pt">'+["I","II","III","IV","V"][i]+'</div><div class="nm">An empty seat at the table</div></li>';
+  $("#slots").innerHTML=html;
+  $("#sumMembers").textContent=n+(n===1?" member":" members");
+  const max=st.cap*5;
+  $("#bars").innerHTML=STATS.map(s=>{const v=st.team.reduce((a,id)=>a+byId[id][s],0);return '<div class="bar"><span>'+s+'</span><div class="tr"><i style="width:'+(v/max*100)+'%"></i></div><b>'+v+'</b></div>'}).join("");
+  $("#btnRead").disabled=$("#btnShare").disabled=$("#btnExport").disabled=!n;
+  renderClear();
+  if(st.reading&&n)renderReading();else{$("#reading").innerHTML="";st.reading=false}
+}
+function renderClear(){
+  const host=$("#btnClear");if(!host&&!st.confirm)return;
+  const pa=$("#pActions");const old=pa.querySelector(".confirm,#btnClear");
+  const el=document.createElement("div");
+  if(st.confirm&&st.team.length){el.innerHTML='<div class="confirm"><span>Strike every name from the roll?</span><button class="btn sm blood" type="button" id="yesClear"><span class="sh"></span>Clear</button><button class="btn sm" type="button" id="noClear">Keep</button></div>'}
+  else{st.confirm=false;el.innerHTML='<button class="linkish" type="button" id="btnClear"'+(st.team.length?'':' disabled style="opacity:.4;cursor:default"')+'>Clear the roll</button>'}
+  old.replaceWith(el.firstChild);
+}
+function composition(){
+  const t=st.team.map(id=>byId[id]);
+  const sum=Object.fromEntries(STATS.map(s=>[s,t.reduce((a,h)=>a+h[s],0)]));
+  const ranked=[...STATS].sort((a,b)=>sum[b]-sum[a]);
+  const classes=[...new Set(t.map(h=>h.cls))];
+  const missing=CLASSES.slice(1).filter(c=>!classes.includes(c));
+  const lean={might:"a coven that settles things up close",grit:"a coven built to endure",wits:"a coven that plans before it strikes",resolve:"a coven that holds firm against dread"}[ranked[0]];
+  return {sum,ranked,classes,missing,lean,t};
+}
+function renderReading(){
+  const c=composition();
+  $("#reading").innerHTML='<div class="reading"><h4>A reading of your coven</h4><p>'+c.t.length+' of '+st.cap+' seats filled. Strongest in <b>'+c.ranked[0]+'</b> ('+c.sum[c.ranked[0]]+'), weakest in <b>'+c.ranked[3]+'</b> ('+c.sum[c.ranked[3]]+'): '+c.lean+'.</p><p>Archetypes present: '+c.classes.join(", ")+'.'+(c.missing.length?' Not yet represented: '+c.missing.join(", ")+'.':' Every archetype in this roster is represented.')+'</p><p style="font-size:.75rem;color:var(--ash);margin:0">Based on placeholder attributes only. No game rules are implied.</p></div>';
+}
+function teamCode(){return "GC-"+st.cap+"-"+st.team.map(id=>id.slice(0,3).toUpperCase()).join("-")}
+
+/* ---------------- actions ---------------- */
+function add(id){
+  if(st.team.includes(id)){toast(byId[id].name+" already rides with this coven");return}
+  if(st.team.length>=st.cap){toast("The coven is full. Remove a hunter or raise the coven size.");return}
+  st.team.push(id);st.reading&&0;save();renderPanel();renderRoster();toast(byId[id].name+" joins the coven");
+}
+function remove(id){
+  const li=document.querySelector('[data-slot="'+id+'"]');
+  const go=()=>{st.team=st.team.filter(x=>x!==id);save();renderPanel();renderRoster()};
+  if(li&&!matchMedia("(prefers-reduced-motion: reduce)").matches){li.classList.add("out");setTimeout(go,330)}else go();
+}
+document.addEventListener("click",e=>{
+  const a=e.target.closest("[data-add]");if(a){const id=a.dataset.add;st.team.includes(id)?remove(id):add(id);return}
+  const r=e.target.closest("[data-rm]");if(r){remove(r.dataset.rm);return}
+  const c=e.target.closest("[data-cls]");if(c){st.cls=c.dataset.cls;renderChips();renderRoster();return}
+  const s=e.target.closest("[data-scroll]");if(s){document.getElementById(s.dataset.scroll).scrollIntoView({behavior:"smooth"});return}
+  if(e.target.closest("#btnClear")){if(st.team.length){st.confirm=true;renderClear()}return}
+  if(e.target.closest("#noClear")){st.confirm=false;renderClear();return}
+  if(e.target.closest("#yesClear")){st.confirm=false;st.team=[];st.reading=false;save();renderPanel();renderRoster();toast("The roll is clear");return}
+});
+$("#q").addEventListener("input",e=>{st.q=e.target.value;renderRoster()});
+$("#sort").addEventListener("change",e=>{st.sort=e.target.value;renderRoster()});
+$("#capMinus").addEventListener("click",()=>{if(st.cap<=1)return;if(st.team.length>=st.cap){toast("Remove a hunter before shrinking the coven");return}st.cap--;save();renderPanel();renderRoster()});
+$("#capPlus").addEventListener("click",()=>{if(st.cap>=5){toast("Five seats is the most this builder offers");return}st.cap++;save();renderPanel();renderRoster()});
+$("#btnRead").addEventListener("click",()=>{st.reading=true;renderReading();$("#reading").scrollIntoView({behavior:"smooth",block:"nearest"})});
+$("#btnShare").addEventListener("click",()=>{
+  const code=teamCode();
+  const done=()=>toast("Coven code copied: "+code);
+  try{navigator.clipboard.writeText(code).then(done,()=>showCode(code))}catch(err){showCode(code)}
+});
+$("#btnExport").addEventListener("click",()=>{
+  const c=composition();
+  $("#reading").innerHTML='<div class="reading"><h4>Export preview</h4><p>Exporting is a visual prototype. Your roll as text:</p><code id="expTxt">'+c.t.map(h=>h.name+" ("+h.cls+")").join(" · ")+'<br>'+STATS.map(s=>s.toUpperCase()+" "+c.sum[s]).join(" · ")+'<br>'+teamCode()+'</code></div>';
+  st.reading=false;
+});
+function showCode(code){$("#reading").innerHTML='<div class="reading"><h4>Your coven code</h4><p>Copying isn\'t available here. Select the code below to copy it.</p><code>'+code+'</code></div>'}
+$("#toPanel").addEventListener("click",()=>$("#panel").scrollIntoView({behavior:"smooth"}));
+
+/* ---------------- featured fan ---------------- */
+$("#fanSpread").innerHTML=["marksman","duelist","occultist"].map(id=>cardHTML(byId[id],false)).join("").replace(/ data-add="[^"]*"/g,"");
+
+/* ---------------- routing ---------------- */
+const ROUTES={"home":"view-home","team-builder":"view-team-builder","about":"view-about"};
+function route(){
+  const r=ROUTES[location.hash.slice(1)]?location.hash.slice(1):"home";
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id===ROUTES[r]));
+  document.querySelectorAll(".nav ul a").forEach(a=>{if(a.dataset.route===r)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  window.scrollTo({top:0,behavior:"instant"in window?"instant":"auto"});
+  hero.running=(r==="home");
+}
+window.addEventListener("hashchange",route);
+
+/* ---------------- hero canvas ---------------- */
+const cv=$("#heroCanvas"),cx=cv.getContext("2d");
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const hero={running:true,t:0,embers:[],sky:null};
+function buildSky(w,h){
+  const o=document.createElement("canvas");o.width=w;o.height=h;const g=o.getContext("2d");
+  let gr=g.createLinearGradient(0,0,0,h);gr.addColorStop(0,"#0b0a0d");gr.addColorStop(.55,"#19151b");gr.addColorStop(1,"#100F12");g.fillStyle=gr;g.fillRect(0,0,w,h);
+  const mx=w*.82,my=h*.2,mr=Math.min(w,h)*.09;
+  let mg=g.createRadialGradient(mx,my,mr*.4,mx,my,mr*5);mg.addColorStop(0,"rgba(229,223,210,.18)");mg.addColorStop(1,"rgba(229,223,210,0)");g.fillStyle=mg;g.fillRect(0,0,w,h);
+  g.fillStyle="rgba(229,223,210,.82)";g.beginPath();g.arc(mx,my,mr,0,7);g.fill();
+  g.fillStyle="rgba(143,48,53,.18)";g.beginPath();g.arc(mx,my,mr,0,7);g.fill();
+  g.fillStyle="rgba(14,13,17,.97)";g.beginPath();g.arc(mx+mr*.38,my-mr*.1,mr*.92,0,7);g.fill();
+  const rnd=seed("grim");
+  for(let i=0;i<160;i++){g.fillStyle="rgba(229,223,210,"+(rnd()*.5)+")";g.fillRect(rnd()*w,rnd()*h*.6,rnd()*1.4,rnd()*1.4)}
+  // far city: spires, gables, chimneys
+  const layer=(base,amp,col,step)=>{g.fillStyle=col;g.beginPath();g.moveTo(0,h);let x=0;
+    while(x<w){const bw=step*(.6+rnd()),bh=base-amp*rnd();g.lineTo(x,bh);
+      const k=rnd();if(k<.22){g.lineTo(x+bw*.5,bh-amp*.9*rnd()-amp*.4);g.lineTo(x+bw,bh)}else if(k<.45){g.lineTo(x+bw*.5,bh-bw*.5);g.lineTo(x+bw,bh)}else if(k<.6){g.lineTo(x+bw*.2,bh);g.lineTo(x+bw*.2,bh-amp*.35);g.lineTo(x+bw*.32,bh-amp*.35);g.lineTo(x+bw*.32,bh);g.lineTo(x+bw,bh)}else g.lineTo(x+bw,bh);
+      x+=bw}g.lineTo(w,h);g.fill()};
+  layer(h*.74,h*.22,"#1c1820",w/26);
+  // cathedral silhouette
+  const cxp=w*.36,base=h*.78;g.fillStyle="#141116";g.beginPath();g.moveTo(cxp-w*.12,h);g.lineTo(cxp-w*.12,base-h*.12);g.lineTo(cxp-w*.07,base-h*.22);g.lineTo(cxp-w*.05,base-h*.12);g.lineTo(cxp-w*.03,base-h*.12);g.lineTo(cxp-w*.03,base-h*.36);g.lineTo(cxp,base-h*.62);g.lineTo(cxp+w*.03,base-h*.36);g.lineTo(cxp+w*.03,base-h*.12);g.lineTo(cxp+w*.05,base-h*.12);g.lineTo(cxp+w*.07,base-h*.22);g.lineTo(cxp+w*.12,base-h*.12);g.lineTo(cxp+w*.12,h);g.fill();
+  g.fillStyle="rgba(176,67,74,.55)";g.beginPath();g.arc(cxp,base-h*.28,Math.max(4,w*.008),0,7);g.fill();
+  for(let i=-1;i<=1;i+=2){g.fillStyle="rgba(224,166,74,.35)";g.fillRect(cxp+i*w*.085-2,base-h*.08,4,h*.03)}
+  layer(h*.9,h*.16,"#0e0d10",w/18);
+  // dead trees
+  const tree=(x,y,s,d)=>{if(d>7||s<1.2)return;const a=-Math.PI/2+(rnd()-.5)*1.1;g.lineWidth=s;g.beginPath();g.moveTo(x,y);const nx=x+Math.cos(a)*s*9,ny=y+Math.sin(a)*s*9;g.lineTo(nx,ny);g.stroke();tree(nx,ny,s*.72,d+1);if(rnd()<.75)tree(nx,ny,s*.62,d+1)};
+  g.strokeStyle="#0b0a0d";g.lineCap="round";tree(w*.06,h,9,0);tree(w*.95,h,8,0);tree(w*.86,h,5,1);
+  return o;
+}
+function size(){
+  const r=cv.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);
+  cv.width=Math.max(1,r.width*d);cv.height=Math.max(1,r.height*d);cx.setTransform(1,0,0,1,0,0);
+  hero.sky=buildSky(cv.width,cv.height);
+  hero.embers=Array.from({length:Math.round(r.width/14)},()=>({x:Math.random(),y:Math.random(),v:.0006+Math.random()*.0016,s:Math.random()*2+.6,p:Math.random()*6}));
+  draw();
+}
+function draw(){
+  const w=cv.width,h=cv.height;if(!hero.sky)return;
+  cx.drawImage(hero.sky,0,0);
+  const t=hero.t;
+  for(let i=0;i<3;i++){const y=h*(.68+i*.09),off=(t*(8+i*5))%w;
+    const fg=cx.createLinearGradient(0,y-h*.1,0,y+h*.1);fg.addColorStop(0,"rgba(150,144,153,0)");fg.addColorStop(.5,"rgba(150,144,153,"+(.06+i*.025)+")");fg.addColorStop(1,"rgba(150,144,153,0)");
+    cx.fillStyle=fg;cx.save();cx.translate(off,0);cx.fillRect(-w,y-h*.1,w*3,h*.2);cx.restore()}
+  for(const e of hero.embers){const x=(e.x+Math.sin(t*.01+e.p)*.01)*w,y=e.y*h;
+    cx.fillStyle="rgba(214,110,70,"+(.25+.35*Math.sin(t*.05+e.p)**2)+")";cx.beginPath();cx.arc(x,y,e.s*(devicePixelRatio||1),0,7);cx.fill();
+    if(!reduce){e.y-=e.v;if(e.y<.05){e.y=1;e.x=Math.random()}}}
+  const vg=cx.createRadialGradient(w/2,h*.45,Math.min(w,h)*.3,w/2,h*.5,Math.max(w,h)*.75);vg.addColorStop(0,"rgba(16,15,18,0)");vg.addColorStop(1,"rgba(16,15,18,.85)");cx.fillStyle=vg;cx.fillRect(0,0,w,h);
+  const cen=cx.createRadialGradient(w/2,h*.48,0,w/2,h*.48,Math.min(w,h)*.5);cen.addColorStop(0,"rgba(16,15,18,.55)");cen.addColorStop(1,"rgba(16,15,18,0)");cx.fillStyle=cen;cx.fillRect(0,0,w,h);
+}
+function loop(){if(hero.running&&!reduce){hero.t++;draw()}requestAnimationFrame(loop)}
+let rt;window.addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(size,150)});
+
+/* ---------------- boot ---------------- */
+renderChips();renderRoster();renderPanel();route();size();loop();
+})();
+</script>
+
+</body>
+</html>
