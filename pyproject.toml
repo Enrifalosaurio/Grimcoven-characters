@@ -19,6 +19,7 @@ dev = [
     "pytest>=8.0",
     "httpx>=0.27",
     "ruff",
+    "playwright>=1.48",
 ]
 
 [tool.setuptools.packages.find]
@@ -29,6 +30,7 @@ testpaths = ["tests"]
 pythonpath = ["src"]
 markers = [
     "docker: tests que construyen la imagen Docker y arrancan contenedores (se saltan sin Docker)",
+    "e2e: tests en navegador real con Playwright y Chromium (se saltan sin ellos, salvo con GRIMCOVEN_REQUIRE_E2E=1)",
 ]
 
 [tool.ruff]
