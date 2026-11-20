@@ -1,42 +1,151 @@
-/* Tema visual de fantasia oscura para Grimcoven Equipos.
+/* Tema visual oscuro para Grimcoven Equipos.
  *
- * Colores: pergamino, ocre, granate y tinta.
- * Tipografia: MedievalSharp (Google Fonts, licencia OFL) + serif fallback.
+ * Tokens, tipografia local (woff2), layout, navegacion y pie.
+ * Las fuentes se cargan desde /static/fonts/ (sin CDN externo).
  */
 
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+/* ---------- @font-face ---------- */
+
+@font-face {
+    font-family: 'UnifrakturMaguntia';
+    src: url('/static/fonts/UnifrakturMaguntia-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IM Fell English SC';
+    src: url('/static/fonts/IMFellEnglishSC-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IM Fell English';
+    src: url('/static/fonts/IMFellEnglish-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IM Fell English';
+    src: url('/static/fonts/IMFellEnglish-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Spectral';
+    src: url('/static/fonts/Spectral-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Spectral';
+    src: url('/static/fonts/Spectral-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Spectral';
+    src: url('/static/fonts/Spectral-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Spectral';
+    src: url('/static/fonts/Spectral-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cinzel';
+    src: url('/static/fonts/Cinzel-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cinzel';
+    src: url('/static/fonts/Cinzel-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ---------- tokens ---------- */
 
 :root {
-    --color-pergamino: #e8d8b0;
-    --color-ocre: #b5832a;
-    --color-granate: #6e1414;
-    --color-tinta: #2a1a12;
-    --color-error-fondo: #f5e6e6;
+    --void: #100F12;
+    --char: #19171C;
+    --char-2: #211E25;
+    --blood: #8F3035;
+    --blood-hi: #B0434A;
+    --gold: #B69A64;
+    --gold-dim: rgba(182, 154, 100, .38);
+    --gold-faint: rgba(182, 154, 100, .14);
+    --ivory: #E5DFD2;
+    --ash: #969099;
+    --ash-text: #A89FAC;
+    --parch: #2A2420;
+    --parch-ink: #D9CDB4;
+    --f-mark: 'UnifrakturMaguntia', 'IM Fell English SC', Georgia, serif;
+    --f-head: 'IM Fell English SC', 'IM Fell English', Georgia, serif;
+    --f-ital: 'IM Fell English', Georgia, serif;
+    --f-body: 'Spectral', Georgia, 'Times New Roman', serif;
+    --f-num: 'Cinzel', 'IM Fell English SC', Georgia, serif;
+    color-scheme: dark;
+}
+
+/* ---------- reset y base ---------- */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--color-pergamino);
-    color: var(--color-tinta);
-    font-family: Georgia, 'Times New Roman', serif;
+    display: flex;
+    flex-direction: column;
+    background: var(--void);
+    color: var(--ivory);
+    font-family: 'Spectral', Georgia, 'Times New Roman', serif;
+    font-size: 16px;
     line-height: 1.6;
     min-height: 100vh;
 }
 
 h1, h2, h3 {
-    font-family: 'MedievalSharp', serif;
-    color: var(--color-granate);
-}
-
-h1, h2 {
-    border-bottom: 2px solid var(--color-ocre);
-    padding-bottom: 0.3em;
+    text-wrap: balance;
+    font-weight: 400;
+    margin: 0;
+    font-family: var(--f-head);
+    color: var(--ivory);
 }
 
 h1 {
+    font-family: var(--f-mark);
     font-size: 2.5rem;
     text-align: center;
+    line-height: .9;
 }
 
 h2 {
@@ -48,41 +157,51 @@ h3 {
 }
 
 a {
-    color: var(--color-granate);
+    color: var(--gold);
     text-decoration: none;
-    border-bottom: 1px solid var(--color-ocre);
-    transition: color 0.2s, border-color 0.2s;
+    transition: color 0.3s;
 }
 
 a:hover {
-    color: #7a5218;
-    border-bottom-color: var(--color-granate);
+    color: var(--ivory);
 }
 
 a:focus-visible {
-    outline: 2px solid var(--color-granate);
+    outline: 2px solid var(--gold);
     outline-offset: 3px;
     border-radius: 2px;
 }
 
-nav {
-    text-align: center;
-    margin: 1.5rem 0;
+button:focus-visible, select:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
-nav a {
-    display: inline-block;
-    margin: 0 1rem;
-    padding: 0.5rem 1rem;
-    border: 2px solid var(--color-granate);
-    border-radius: 4px;
-    font-family: 'MedievalSharp', serif;
-    font-size: 1.1rem;
+button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
 }
 
-nav a:hover {
-    background-color: var(--color-granate);
-    color: var(--color-pergamino);
+/* ---------- sr-only (visually hidden) ---------- */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+/* ---------- layout ---------- */
+
+.wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 .contenedor {
@@ -91,26 +210,163 @@ nav a:hover {
     padding: 2rem 1.5rem;
 }
 
-button, select {
-    font-family: Georgia, 'Times New Roman', serif;
+.eyebrow {
+    font-family: var(--f-head);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    font-size: .78rem;
+    color: var(--gold);
+}
+
+/* ---------- ornamental rule ---------- */
+
+.orn {
+    display: block;
+    height: 18px;
+    color: var(--gold);
+}
+
+/* ---------- nav ---------- */
+
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(16, 15, 18, .86);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gold-faint);
+}
+
+.nav .wrap {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 64px;
+}
+
+.mark {
+    font-family: var(--f-mark);
+    font-size: 1.7rem;
+    color: var(--ivory);
+    text-decoration: none;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.mark small {
+    font-family: var(--f-head);
+    font-size: .62rem;
+    letter-spacing: .24em;
+    color: var(--ash-text);
+    text-transform: uppercase;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 26px;
+    margin: 0 0 0 auto;
+    padding: 0;
+}
+
+.nav ul a {
+    font-family: var(--f-head);
+    font-size: .95rem;
+    letter-spacing: .08em;
+    color: var(--ash-text);
+    text-decoration: none;
+    padding: 6px 0;
+    position: relative;
+    transition: color .3s;
+}
+
+.nav ul a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: left .35s, right .35s;
+}
+
+.nav ul a:hover,
+.nav ul a[aria-current="page"] {
+    color: var(--ivory);
+}
+
+.nav ul a[aria-current="page"]::after,
+.nav ul a:hover::after {
+    left: 0;
+    right: 0;
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+    --bc: var(--gold);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--f-head);
     font-size: 1rem;
-    color: var(--color-tinta);
-    background-color: var(--color-pergamino);
-    border: 2px solid var(--color-granate);
+    letter-spacing: .12em;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid var(--bc);
+    color: var(--ivory);
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: background .35s, color .35s, box-shadow .35s;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background: var(--gold-faint);
+    box-shadow: 0 0 24px rgba(182, 154, 100, .18);
+}
+
+.btn.blood {
+    --bc: var(--blood-hi);
+    background: linear-gradient(180deg, #9a353b, #6e2328);
+    border-color: #b0434a;
+}
+
+.btn.blood:hover {
+    box-shadow: 0 0 28px rgba(176, 67, 74, .45);
+    background: linear-gradient(180deg, #a83c42, #7a272c);
+}
+
+.btn.sm {
+    padding: 8px 16px;
+    font-size: .85rem;
+}
+
+/* ---------- main content ---------- */
+
+main {
+    flex: 1;
+}
+
+/* ---------- equipos y cartas (heredado) ---------- */
+
+button, select {
+    font-family: var(--f-body);
+    font-size: 1rem;
+    color: var(--ivory);
+    background-color: var(--char);
+    border: 1px solid var(--gold-dim);
     border-radius: 4px;
     padding: 0.5rem 1rem;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: var(--color-granate);
-    color: var(--color-pergamino);
-}
-
-button:focus-visible, select:focus-visible {
-    outline: 2px solid var(--color-granate);
-    outline-offset: 3px;
-    border-radius: 2px;
+    background-color: var(--gold-faint);
 }
 
 .equipo {
@@ -121,33 +377,34 @@ button:focus-visible, select:focus-visible {
 }
 
 .carta-cazador {
-    border: 2px solid var(--color-granate);
+    border: 1px solid var(--gold-dim);
     border-radius: 4px;
     padding: 0;
     flex: 1 1 180px;
     max-width: 250px;
-    background-color: var(--color-pergamino);
+    background-color: var(--char);
 }
 
 .nombre-cazador {
-    background: var(--color-ocre);
-    color: var(--color-tinta);
+    background: var(--parch);
+    color: var(--parch-ink);
     padding: 0.5rem;
     margin: 0;
-    font-family: 'MedievalSharp', serif;
+    font-family: var(--f-head);
     font-size: 1.3rem;
-    border-bottom: 2px solid var(--color-granate);
+    border-bottom: 1px solid var(--gold-dim);
 }
 
 .roles-cazador {
     list-style: none;
     padding: 0.5rem 1rem;
     margin: 0;
+    color: var(--ash-text);
 }
 
 .roles-cazador li {
     padding: 0.2rem 0;
-    border-bottom: 1px solid var(--color-ocre);
+    border-bottom: 1px solid var(--gold-faint);
 }
 
 .roles-cazador li:last-child {
@@ -155,42 +412,48 @@ button:focus-visible, select:focus-visible {
 }
 
 .mensaje-error {
-    color: var(--color-granate);
+    color: #E8787F;
     font-weight: bold;
-    border: 2px solid var(--color-granate);
+    border: 1px solid var(--blood);
     border-radius: 4px;
     padding: 0.75rem 1rem;
-    background-color: var(--color-error-fondo);
+    background-color: rgba(143, 48, 53, .15);
 }
 
 .boton-secundario {
     display: inline-block;
     margin: 1rem 0;
     padding: 0.5rem 1rem;
-    border: 2px solid var(--color-granate);
+    border: 1px solid var(--gold);
     border-radius: 4px;
-    font-family: 'MedievalSharp', serif;
+    font-family: var(--f-head);
     font-size: 1.1rem;
-    color: var(--color-granate);
+    color: var(--gold);
     text-decoration: none;
 }
 
 .boton-secundario:hover {
-    background-color: var(--color-granate);
-    color: var(--color-pergamino);
+    background-color: var(--gold-faint);
+    color: var(--ivory);
 }
 
-footer {
-    text-align: center;
-    padding: 1.5rem;
-    margin-top: 3rem;
-    border-top: 2px solid var(--color-ocre);
-    font-size: 0.85rem;
-    color: var(--color-tinta);
-    opacity: 0.8;
+/* ---------- equipo-recomendado ---------- */
+
+.equipo-recomendado {
+    border: 1px solid var(--gold-dim);
+    border-radius: 4px;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: var(--char);
 }
 
-/* Formulario del recomendador: controles apilados a ancho completo */
+.equipo-recomendado h2 {
+    border-bottom: 1px solid var(--gold-faint);
+    padding-bottom: 0.3em;
+}
+
+/* ---------- formulario del recomendador ---------- */
+
 .form-recomendador label,
 .form-recomendador select,
 .form-recomendador button {
@@ -202,14 +465,151 @@ footer {
 
 .form-recomendador button {
     min-height: 44px;
-    font-family: 'MedievalSharp', serif;
+    font-family: var(--f-head);
     font-size: 1.1rem;
 }
 
-/* Mensaje de aviso */
+/* ---------- aviso ---------- */
+
 .aviso {
     font-style: italic;
     opacity: 0.85;
-    border-left: 3px solid var(--color-ocre);
+    border-left: 3px solid var(--gold);
     padding-left: 0.75rem;
+    color: var(--ash-text);
+}
+
+/* ---------- footer ---------- */
+
+footer {
+    border-top: 1px solid var(--gold-faint);
+    padding-block: 56px 40px;
+    background: var(--void);
+}
+
+footer .wrap {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+}
+
+footer .mark {
+    font-size: 2rem;
+}
+
+footer p {
+    color: var(--ash-text);
+    font-size: .85rem;
+    max-width: 58ch;
+}
+
+footer nav {
+    display: flex;
+    gap: 22px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+footer nav a {
+    font-family: var(--f-head);
+    color: var(--ash-text);
+    text-decoration: none;
+    letter-spacing: .08em;
+}
+
+footer nav a:hover {
+    color: var(--gold);
+}
+
+footer .fine {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--gold-faint);
+    padding-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: .75rem;
+    color: var(--ash-text);
+}
+
+/* ---------- accessibility ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 860px) {
+    .nav ul {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 560px) {
+    .nav .wrap {
+        gap: 12px;
+    }
+
+    .mark small {
+        display: none;
+    }
+
+    .mark {
+        font-size: 1.45rem;
+    }
+
+    .nav ul {
+        gap: 14px;
+    }
+
+    .nav ul a {
+        font-size: .85rem;
+    }
+
+    footer .wrap {
+        grid-template-columns: 1fr;
+    }
+
+    footer nav {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 360px) {
+    .nav .wrap {
+        flex-wrap: wrap;
+        height: auto;
+        padding-block: 8px;
+    }
+
+    .nav nav {
+        width: 100%;
+    }
+
+    .nav ul {
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .nav ul a {
+        font-size: .78rem;
+    }
+
+    .equipo {
+        flex-direction: column;
+    }
+
+    .carta-cazador {
+        max-width: 100%;
+    }
 }
