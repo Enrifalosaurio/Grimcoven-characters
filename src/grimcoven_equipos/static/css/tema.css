@@ -352,6 +352,121 @@ main {
     flex: 1;
 }
 
+/* ---------- roster (creador de equipos) ---------- */
+
+.roster {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.card {
+    border: 1px solid var(--gold-dim);
+    border-radius: 6px;
+    background: var(--char);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-retrato {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1rem 0;
+}
+
+.card-retrato svg {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+}
+
+.card-body {
+    padding: 0.75rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.card-nombre {
+    font-family: var(--f-head);
+    font-size: 1.15rem;
+    color: var(--ivory);
+    text-align: center;
+    margin: 0;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--gold-faint);
+}
+
+.stats dl {
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+
+.stats .stat {
+    text-align: center;
+}
+
+.stats dt {
+    font-family: var(--f-head);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ash-text);
+}
+
+.stats dd {
+    margin: 0;
+    font-family: var(--f-num);
+    font-size: 1.1rem;
+    color: var(--ivory);
+}
+
+.arch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+}
+
+.role-tag {
+    font-family: var(--f-head);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    padding: 2px 10px;
+    border: 1px solid var(--gold-dim);
+    border-radius: 3px;
+    color: var(--gold);
+}
+
+.desc {
+    font-size: 0.85rem;
+    color: var(--ash-text);
+    text-align: center;
+    font-style: italic;
+}
+
+.meta-row {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--ash-text);
+    font-style: italic;
+    margin-top: 1.5rem;
+}
+
+.tb-head {
+    font-family: var(--f-head);
+}
+
+.creador-cta {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
 /* ---------- equipos y cartas (heredado) ---------- */
 
 button, select {
@@ -552,6 +667,10 @@ footer .fine {
 @media (max-width: 860px) {
     .nav ul {
         gap: 16px;
+    }
+
+    .creador-cta {
+        display: none;
     }
 }
 

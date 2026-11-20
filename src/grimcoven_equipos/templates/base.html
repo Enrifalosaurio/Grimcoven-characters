@@ -21,6 +21,7 @@
     <nav aria-label="Principal">
       <ul>
         <li><a href="/"{% if request.url.path == "/" %} aria-current="page"{% endif %}>Inicio</a></li>
+        <li><a href="/creador"{% if request.url.path == "/creador" %} aria-current="page"{% endif %}>Creador de equipos</a></li>
         <li><a href="/aleatorio"{% if request.url.path == "/aleatorio" %} aria-current="page"{% endif %}>Equipo aleatorio</a></li>
         <li><a href="/recomendador"{% if request.url.path == "/recomendador" %} aria-current="page"{% endif %}>Recomendador</a></li>
       </ul>
@@ -42,6 +43,7 @@
     </div>
     <nav aria-label="Pie">
       <a href="/">Inicio</a>
+      <a href="/creador">Creador de equipos</a>
       <a href="/aleatorio">Equipo aleatorio</a>
       <a href="/recomendador">Recomendador</a>
     </nav>

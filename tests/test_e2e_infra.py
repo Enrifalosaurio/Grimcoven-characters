@@ -98,6 +98,20 @@ class Keyboard:
         _anotar("keyboard.press " + key)
 
 
+class Locator:
+    """Doble minimo de Playwright Locator para que los tests e2e no rompan."""
+    def __init__(self, count_val=1, visible=False):
+        self._count = count_val
+        self._visible = visible
+        self.first = self
+
+    def count(self):
+        return self._count
+
+    def is_visible(self):
+        return self._visible
+
+
 class Page:
     def __init__(self):
         self._manejadores = {}
@@ -151,6 +165,10 @@ class Page:
         if "scrollWidth" in resultado:
             return 360
         return ""
+
+    def locator(self, selector):
+        _anotar("locator " + selector)
+        return Locator(count_val=1, visible=False)
 
     def title(self):
         return self._titulo
@@ -476,8 +494,10 @@ def test_ca3_humo_abre_la_raiz_y_libera_el_navegador(tmp_path: Path) -> None:
     eventos = _registro(tmp_path)
     visitas = [e.removeprefix("goto ") for e in eventos if e.startswith("goto ")]
     assert visitas, f"No se abrio ninguna pagina: {eventos}"
-    assert urlsplit(visitas[0]).path in ("", "/")
-    assert urlsplit(visitas[0]).hostname == "127.0.0.1"
+    # Al menos una visita va a la raiz (el test de humo) y todas van a 127.0.0.1.
+    rutas = [urlsplit(v).path for v in visitas]
+    assert any(r in ("", "/") for r in rutas), f"Ninguna visita fue a /: {rutas}"
+    assert all(urlsplit(v).hostname == "127.0.0.1" for v in visitas)
     # La CI no tiene pantalla: el navegador debe ir sin interfaz grafica.
     assert "launch headless=True" in eventos
     assert "browser.close" in eventos

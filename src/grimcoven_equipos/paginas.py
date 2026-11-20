@@ -6,6 +6,7 @@ encuentran en ``src/grimcoven_equipos/templates/``.
 Rutas:
 - GET / — pagina de inicio
 - GET /aleatorio — selector aleatorio de equipos
+- GET /creador — creador de equipos con cartas de cazadores
 - GET /recomendador — recomendador de equipos contra un Griefbound
 """
 
@@ -24,6 +25,7 @@ from grimcoven_equipos.api.dependencias import obtener_catalogo
 from grimcoven_equipos.catalogo import Catalogo, Cazador, Griefbound
 from grimcoven_equipos.equipos.aleatorio import generar_equipo_aleatorio
 from grimcoven_equipos.equipos.recomendador import recomendar_equipos
+from grimcoven_equipos.retratos import retrato_svg
 
 logger = logging.getLogger(__name__)
 
@@ -47,10 +49,37 @@ def _tamano_valido(tamano: int) -> bool:
     return _TAMANO_MIN <= tamano <= _TAMANO_MAX
 
 
+_ETIQUETAS_ROLES: dict[str, str] = {
+    "tanque": "Tanque",
+    "dano": "Da\u00f1o",
+    "apoyo": "Apoyo",
+    "control": "Control",
+}
+
+
 @router.get("/", response_class=HTMLResponse)
 def inicio(request: Request) -> HTMLResponse:
     """Pagina de inicio con enlaces a /aleatorio y /recomendador."""
     return templates.TemplateResponse(request, "inicio.html")
+
+
+@router.get("/creador", response_class=HTMLResponse)
+def creador(
+    request: Request,
+    catalogo: Catalogo = Depends(obtener_catalogo),  # noqa: B008
+) -> HTMLResponse:
+    """Pagina del creador de equipos con cartas de cazadores reales."""
+    cazadores = catalogo.cazadores_ordenados()
+    retratos = {c.id: retrato_svg(c) for c in cazadores}
+    return templates.TemplateResponse(
+        request,
+        "creador.html",
+        {
+            "cazadores": cazadores,
+            "retratos": retratos,
+            "etiquetas_roles": _ETIQUETAS_ROLES,
+        },
+    )
 
 
 @router.get("/aleatorio", response_class=HTMLResponse)
