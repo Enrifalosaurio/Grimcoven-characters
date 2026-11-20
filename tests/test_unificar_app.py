@@ -69,6 +69,7 @@ def test_ca1_equipos_aleatorio_tamano_3_semilla_42(client: TestClient) -> None:
 RUTAS_ESPERADAS = {
     "/",
     "/aleatorio",
+    "/creador",
     "/api/cazadores",
     "/api/cazadores/{cazador_id}",
     "/api/griefbound",
@@ -80,7 +81,7 @@ RUTAS_ESPERADAS = {
 
 
 def test_ca2_openapi_paths_exactas(client: TestClient) -> None:
-    """CA2: /openapi.json contiene exactamente las 6 rutas esperadas."""
+    """CA2: /openapi.json contiene exactamente las 10 rutas esperadas."""
     resp = client.get("/openapi.json")
     assert resp.status_code == 200
     paths = set(resp.json()["paths"].keys())

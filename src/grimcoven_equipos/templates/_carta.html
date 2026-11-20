@@ -1,0 +1,42 @@
+{#
+  Macro reutilizable para renderizar una carta de cazador.
+  Parametros:
+    - cazador: objeto Cazador
+    - retrato_svg: texto SVG del retrato
+    - etiquetas_roles: dict de rol interno -> etiqueta visible
+    - mostrar_acciones: boolean (False oculta las acciones, para reutilizar en inicio)
+#}
+{% macro carta(cazador, retrato_svg, etiquetas_roles, mostrar_acciones=true) %}
+<article class="card" data-id="{{ cazador.id }}">
+    <div class="card-retrato">
+        {{ retrato_svg|safe }}
+    </div>
+    <div class="card-body">
+        <h2 class="card-nombre">{{ cazador.nombre }}</h2>
+        <div class="stats">
+            <dl>
+                <div class="stat">
+                    <dt>Vida</dt>
+                    <dd>{{ cazador.vida if cazador.vida is not none else '\u2014' }}</dd>
+                </div>
+                <div class="stat">
+                    <dt>Movimiento</dt>
+                    <dd>{{ cazador.movimiento if cazador.movimiento is not none else '\u2014' }}</dd>
+                </div>
+                <div class="stat">
+                    <dt>Complejidad</dt>
+                    <dd>{{ cazador.complejidad }}</dd>
+                </div>
+            </dl>
+        </div>
+        <div class="arch">
+            {% for rol in cazador.roles %}
+            <span class="role-tag">{{ etiquetas_roles.get(rol, rol) }}</span>
+            {% endfor %}
+        </div>
+        <div class="desc">
+            Contrarresta: {{ cazador.contrarresta|join(', ') if cazador.contrarresta else '\u2014' }}
+        </div>
+    </div>
+</article>
+{% endmacro %}

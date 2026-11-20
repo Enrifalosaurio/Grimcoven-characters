@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% from '_carta.html' import carta %}
+
+{% block titulo %}Grimcoven Equipos - Creador de equipos{% endblock %}
+
+{% block contenido %}
+<h1>Forja tu hermandad</h1>
+
+<svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
+
+<p class="creador-cta"><a href="/creador" class="btn blood tb-head">Forjar un aquelarre</a></p>
+
+{% if cazadores %}
+<section class="roster">
+    {% for cazador in cazadores %}
+    {{ carta(cazador, retratos[cazador.id], etiquetas_roles) }}
+    {% endfor %}
+</section>
+<p class="meta-row">Retratos ilustrativos &middot; roles y contrarrestas inferidos del reglamento</p>
+{% else %}
+<p>No hay cazadores en el cat&aacute;logo.</p>
+{% endif %}
+{% endblock %}
