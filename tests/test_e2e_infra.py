@@ -93,10 +93,16 @@ class Response:
     ok = True
 
 
+class Keyboard:
+    def press(self, key):
+        _anotar("keyboard.press " + key)
+
+
 class Page:
     def __init__(self):
         self._manejadores = {}
         self._titulo = ""
+        self.keyboard = Keyboard()
 
     def on(self, evento, manejador):
         self._manejadores.setdefault(evento, []).append(manejador)
@@ -123,6 +129,28 @@ class Page:
         elif MODO == "pageerror":
             self._emitir("pageerror", Error("excepcion de JS"))
         return Response()
+
+    def evaluate(self, expression):
+        _anotar("evaluate " + expression[:60])
+        _font = "Spectral, Georgia, Times New Roman, serif"
+        _EVAL_MAP = {
+            "getComputedStyle(document.body).backgroundColor": "rgb(16, 15, 18)",
+            "getComputedStyle(document.body).color": "rgb(229, 223, 210)",
+            "getComputedStyle(document.body).fontFamily": _font,
+            "document.documentElement.scrollWidth": 360,
+        }
+        resultado = expression.strip()
+        if resultado in _EVAL_MAP:
+            return _EVAL_MAP[resultado]
+        if "outlineStyle" in resultado:
+            return "solid"
+        if "outlineColor" in resultado:
+            return "rgb(182, 154, 100)"
+        if "fontFamily" in resultado:
+            return "Spectral, Georgia, Times New Roman, serif"
+        if "scrollWidth" in resultado:
+            return 360
+        return ""
 
     def title(self):
         return self._titulo

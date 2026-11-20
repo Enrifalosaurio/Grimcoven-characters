@@ -8,12 +8,50 @@
     {% block head_extra %}{% endblock %}
 </head>
 <body>
+
+<svg width="0" height="0" class="sr-only" aria-hidden="true">
+  <defs>
+    <symbol id="orn" viewBox="0 0 420 18"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M0 9h170M250 9h170"/><path d="M170 9l10-6 10 6-10 6z"/><path d="M230 9l10-6 10 6-10 6z"/><circle cx="210" cy="9" r="6"/><circle cx="210" cy="9" r="2" fill="currentColor"/><path d="M190 9h14M216 9h14"/><path d="M40 9l6-3M40 9l6 3M380 9l-6-3M380 9l-6 3" opacity=".6"/></g></symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="mark" href="/">Grimcoven <small>Códice de fans</small></a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="/"{% if request.url.path == "/" %} aria-current="page"{% endif %}>Inicio</a></li>
+        <li><a href="/aleatorio"{% if request.url.path == "/aleatorio" %} aria-current="page"{% endif %}>Equipo aleatorio</a></li>
+        <li><a href="/recomendador"{% if request.url.path == "/recomendador" %} aria-current="page"{% endif %}>Recomendador</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
     <div class="contenedor">
         {% block contenido %}{% endblock %}
     </div>
+</main>
 
-    <footer>
-        <p>Aplicación no oficial creada por fans. Grimcoven pertenece a sus respectivos propietarios.</p>
-    </footer>
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="mark" href="/">Grimcoven <small>Códice de fans</small></a>
+      <p>Proyecto no oficial creado por fans. Grimcoven pertenece a sus respectivos propietarios. Este sitio no está afiliado a Awaken Realms.</p>
+    </div>
+    <nav aria-label="Pie">
+      <a href="/">Inicio</a>
+      <a href="/aleatorio">Equipo aleatorio</a>
+      <a href="/recomendador">Recomendador</a>
+    </nav>
+    <div class="fine">
+      <span>Hecho por un fan, para la mesa.</span>
+      <svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
+      <span>Solo importa la cacería.</span>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

@@ -1,7 +1,10 @@
-"""Tests de US-005: Tema visual de fantasia oscura y pagina de inicio.
+"""Tests de US-005 / US-014: Tema visual y pagina de inicio.
 
 Cada test indica el criterio de aceptacion (CA<n>) que cubre.
 Se usa fastapi.testclient.TestClient (basado en httpx) sin levantar servidor.
+
+US-014 sustituye los criterios CA2 (variables CSS), CA3 (fondo/fuente) y
+test_edge_css_cuatro_variables_en_root de US-005 por el nuevo tema oscuro.
 """
 
 from __future__ import annotations
@@ -74,7 +77,7 @@ def test_ca1_get_inicio_enlace_recomendador(client: TestClient) -> None:
 
 
 # ---------------------------------------------------------------------------
-# CA2: GET /static/css/tema.css -> 200, text/css, variables CSS
+# CA2: GET /static/css/tema.css -> 200, text/css, tokens del tema oscuro (US-014)
 # ---------------------------------------------------------------------------
 
 
@@ -90,103 +93,65 @@ def test_ca2_get_tema_css_content_type(client: TestClient) -> None:
     assert "text/css" in resp.headers.get("content-type", "")
 
 
-def test_ca2_variable_color_pergamino(client: TestClient) -> None:
-    """CA2: tema.css define --color-pergamino: #e8d8b0."""
+def test_ca2_variable_void(client: TestClient) -> None:
+    """CA2 (US-014): tema.css define --void: #100F12."""
     resp = client.get("/static/css/tema.css")
-    assert "--color-pergamino:" in resp.text
-    # Verificar el valor exacto (permitiendo espacios)
-    match = re.search(r"--color-pergamino:\s*#e8d8b0", resp.text, re.IGNORECASE)
-    assert match is not None, "No se encontro --color-pergamino: #e8d8b0"
+    match = re.search(r"--void\s*:\s*#100F12", resp.text, re.IGNORECASE)
+    assert match is not None, "No se encontro --void: #100F12"
 
 
-def test_ca2_variable_color_ocre(client: TestClient) -> None:
-    """CA2: tema.css define --color-ocre: #b5832a."""
+def test_ca2_variable_blood(client: TestClient) -> None:
+    """CA2 (US-014): tema.css define --blood: #8F3035."""
     resp = client.get("/static/css/tema.css")
-    match = re.search(r"--color-ocre:\s*#b5832a", resp.text, re.IGNORECASE)
-    assert match is not None, "No se encontro --color-ocre: #b5832a"
+    match = re.search(r"--blood\s*:\s*#8F3035", resp.text, re.IGNORECASE)
+    assert match is not None, "No se encontro --blood: #8F3035"
 
 
-def test_ca2_variable_color_granate(client: TestClient) -> None:
-    """CA2: tema.css define --color-granate: #6e1414."""
+def test_ca2_variable_gold(client: TestClient) -> None:
+    """CA2 (US-014): tema.css define --gold: #B69A64."""
     resp = client.get("/static/css/tema.css")
-    match = re.search(r"--color-granate:\s*#6e1414", resp.text, re.IGNORECASE)
-    assert match is not None, "No se encontro --color-granate: #6e1414"
+    match = re.search(r"--gold\s*:\s*#B69A64", resp.text, re.IGNORECASE)
+    assert match is not None, "No se encontro --gold: #B69A64"
 
 
-def test_ca2_variable_color_tinta(client: TestClient) -> None:
-    """CA2: tema.css define --color-tinta: #2a1a12."""
+def test_ca2_variable_ivory(client: TestClient) -> None:
+    """CA2 (US-014): tema.css define --ivory: #E5DFD2."""
     resp = client.get("/static/css/tema.css")
-    match = re.search(r"--color-tinta:\s*#2a1a12", resp.text, re.IGNORECASE)
-    assert match is not None, "No se encontro --color-tinta: #2a1a12"
+    match = re.search(r"--ivory\s*:\s*#E5DFD2", resp.text, re.IGNORECASE)
+    assert match is not None, "No se encontro --ivory: #E5DFD2"
 
 
 # ---------------------------------------------------------------------------
-# CA3: body usa pergamino/tinta; h1, h2 usan MedievalSharp...serif
+# CA3 (US-014): body usa --void como fondo y --ivory como color de texto
 # ---------------------------------------------------------------------------
 
 
-def test_ca3_body_fondo_pergamino(client: TestClient) -> None:
-    """CA3: body usa var(--color-pergamino) como fondo."""
+def test_ca3_body_fondo_void(client: TestClient) -> None:
+    """CA3 (US-014): body usa var(--void) como fondo."""
     resp = client.get("/static/css/tema.css")
     css = resp.text
-    # Buscar background (o background-color) con var(--color-pergamino) dentro de body
-    body_block = _extraer_bloque_css(css, "body")
-    assert body_block is not None, "No se encontro el bloque 'body' en tema.css"
-    assert "var(--color-pergamino)" in body_block, (
-        "body no usa var(--color-pergamino) como fondo"
+    # Buscar background o background-color con var(--void) usando regex directa
+    assert re.search(r"body\b[^{}]*\{[^}]*background\s*:\s*var\(--void\)", css, re.DOTALL), (
+        "body no usa var(--void) como fondo"
     )
 
 
-def test_ca3_body_color_tinta(client: TestClient) -> None:
-    """CA3: body usa var(--color-tinta) como color de texto."""
+def test_ca3_body_color_ivory(client: TestClient) -> None:
+    """CA3 (US-014): body usa var(--ivory) como color de texto."""
     resp = client.get("/static/css/tema.css")
     css = resp.text
-    body_block = _extraer_bloque_css(css, "body")
-    assert body_block is not None, "No se encontro el bloque 'body' en tema.css"
-    # Buscar 'color:' (no 'background-color:') con var(--color-tinta)
-    # Usamos regex para que no matchee background-color
-    match = re.search(r"(?<!-)color\s*:\s*var\(--color-tinta\)", body_block)
-    assert match is not None, "body no usa var(--color-tinta) como color de texto"
+    assert re.search(r"body\b[^{}]*\{[^}]*(?<!-)color\s*:\s*var\(--ivory\)", css, re.DOTALL), (
+        "body no usa var(--ivory) como color de texto"
+    )
 
 
-def test_ca3_h1_font_family_medievalsharp(client: TestClient) -> None:
-    """CA3: h1 declara un font-family que empieza por 'MedievalSharp'."""
+def test_ca3_body_font_family_spectral(client: TestClient) -> None:
+    """CA3 (US-014): body declara un font-family que incluye 'Spectral'."""
     resp = client.get("/static/css/tema.css")
     css = resp.text
-    h1_block = _extraer_bloque_css_selector(css, "h1")
-    assert h1_block is not None, "No se encontro selector que incluya 'h1' en tema.css"
-    match = re.search(r"font-family\s*:\s*['\"]?MedievalSharp", h1_block)
-    assert match is not None, "h1 no tiene font-family que empiece por 'MedievalSharp'"
-
-
-def test_ca3_h1_font_family_termina_serif(client: TestClient) -> None:
-    """CA3: h1 declara un font-family que termina en serif."""
-    resp = client.get("/static/css/tema.css")
-    css = resp.text
-    h1_block = _extraer_bloque_css_selector(css, "h1")
-    assert h1_block is not None, "No se encontro selector que incluya 'h1' en tema.css"
-    match = re.search(r"font-family\s*:[^;]*,\s*serif\s*;", h1_block)
-    assert match is not None, "h1 font-family no termina en serif"
-
-
-def test_ca3_h2_font_family_medievalsharp(client: TestClient) -> None:
-    """CA3: h2 declara un font-family que empieza por 'MedievalSharp'."""
-    resp = client.get("/static/css/tema.css")
-    css = resp.text
-    h2_block = _extraer_bloque_css_selector(css, "h2")
-    assert h2_block is not None, "No se encontro selector que incluya 'h2' en tema.css"
-    match = re.search(r"font-family\s*:\s*['\"]?MedievalSharp", h2_block)
-    assert match is not None, "h2 no tiene font-family que empiece por 'MedievalSharp'"
-
-
-def test_ca3_h2_font_family_termina_serif(client: TestClient) -> None:
-    """CA3: h2 declara un font-family que termina en serif."""
-    resp = client.get("/static/css/tema.css")
-    css = resp.text
-    h2_block = _extraer_bloque_css_selector(css, "h2")
-    assert h2_block is not None, "No se encontro selector que incluya 'h2' en tema.css"
-    match = re.search(r"font-family\s*:[^;]*,\s*serif\s*;", h2_block)
-    assert match is not None, "h2 font-family no termina en serif"
+    assert re.search(r"body\b[^{}]*\{[^}]*font-family\s*:[^;]*Spectral", css, re.DOTALL), (
+        "body no tiene font-family que incluya 'Spectral'"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -201,14 +166,13 @@ def test_ca4_inicio_enlaza_tema_css(client: TestClient) -> None:
 
 
 def test_ca4_inicio_pie_legal(client: TestClient) -> None:
-    """CA4: la pagina de inicio incluye el texto legal en el pie."""
+    """CA4 (US-014): la pagina de inicio incluye el texto legal en el pie."""
     resp = client.get("/")
-    # Normalizar acentos: la app puede usar tildes o no en 'Aplicacion'
-    texto_normalizado = resp.text.lower()
-    assert "no oficial" in texto_normalizado, (
+    texto = resp.text
+    assert "no oficial" in texto.lower(), (
         "No se encontro el texto del pie legal"
     )
-    assert "grimcoven pertenece a sus respectivos" in texto_normalizado, (
+    assert "Grimcoven pertenece a sus respectivos propietarios" in texto, (
         "No se encontro la atribucion de Grimcoven en el pie"
     )
 
@@ -265,7 +229,7 @@ def test_ca4_base_html_enlaza_tema_css() -> None:
 
 
 def test_ca4_base_html_pie_legal() -> None:
-    """CA4: base.html incluye el texto legal en el pie."""
+    """CA4 (US-014): base.html incluye el texto legal del pie."""
     from pathlib import Path
 
     ruta_base = (
@@ -275,9 +239,9 @@ def test_ca4_base_html_pie_legal() -> None:
         / "templates"
         / "base.html"
     )
-    contenido = ruta_base.read_text(encoding="utf-8").lower()
-    assert "no oficial" in contenido
-    assert "grimcoven pertenece a sus respectivos" in contenido
+    contenido = ruta_base.read_text(encoding="utf-8")
+    assert "no oficial" in contenido.lower()
+    assert "Grimcoven pertenece a sus respectivos propietarios" in contenido
 
 
 # ---------------------------------------------------------------------------
@@ -321,16 +285,16 @@ def test_ca5_inicio_sin_imagenes_oficiales(client: TestClient) -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_edge_css_cuatro_variables_en_root(client: TestClient) -> None:
-    """Caso limite: las 4 variables CSS estan en :root."""
+def test_edge_css_tokens_en_root(client: TestClient) -> None:
+    """Caso limite (US-014): los tokens del tema oscuro estan en :root."""
     resp = client.get("/static/css/tema.css")
     css = resp.text
     root_block = _extraer_bloque_css(css, ":root")
     assert root_block is not None, "No se encontro :root en tema.css"
-    assert "--color-pergamino" in root_block
-    assert "--color-ocre" in root_block
-    assert "--color-granate" in root_block
-    assert "--color-tinta" in root_block
+    assert "--void" in root_block
+    assert "--blood" in root_block
+    assert "--gold" in root_block
+    assert "--ivory" in root_block
 
 
 def test_edge_api_sigue_funcionando(client: TestClient) -> None:
@@ -351,34 +315,18 @@ def test_edge_html_charset_utf8(client: TestClient) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Fix iter2: a:hover no debe usar var(--color-ocre) sobre fondo pergamino
-# (contraste insuficiente ~1.74:1, WCAG 2.2 AA exige >= 4.5:1)
+# Fix iter2 (adaptado US-014): a:hover define un color de texto
 # ---------------------------------------------------------------------------
 
 
-def test_fix_hover_no_usa_ocre_crudo(client: TestClient) -> None:
-    """Fix iter2-P1: a:hover no debe usar var(--color-ocre) como color de texto."""
+def test_fix_hover_tiene_color(client: TestClient) -> None:
+    """Fix iter2 (US-014): tema.css tiene una regla a:hover con propiedad color."""
     resp = client.get("/static/css/tema.css")
     css = resp.text
-    hover_block = _extraer_bloque_css_selector(css, "a:hover")
-    # Solo comprobamos el bloque generico a:hover, no nav a:hover
-    assert hover_block is not None, "No se encontro bloque a:hover en tema.css"
-    # El color NO debe ser var(--color-ocre) (ratio ~1.74:1 sobre pergamino)
-    match = re.search(r"(?<!-)color\s*:\s*var\(--color-ocre\)", hover_block)
-    assert match is None, (
-        "a:hover sigue usando var(--color-ocre) como color, contraste insuficiente"
+    # Verificar que a:hover tiene propiedad color (MEMORY: regex con bloque, sin extraer)
+    assert re.search(r"a:hover\s*\{[^}]*(?<!-)color\s*:", css), (
+        "No se encontro regla a:hover con propiedad color en tema.css"
     )
-
-
-def test_fix_hover_tiene_color_con_contraste(client: TestClient) -> None:
-    """Fix iter2-P1: a:hover define un color distinto de --color-ocre."""
-    resp = client.get("/static/css/tema.css")
-    css = resp.text
-    hover_block = _extraer_bloque_css_selector(css, "a:hover")
-    assert hover_block is not None, "No se encontro bloque a:hover en tema.css"
-    # Debe haber una propiedad 'color' definida (no solo border-color)
-    match = re.search(r"(?<!-)color\s*:", hover_block)
-    assert match is not None, "a:hover no define color de texto"
 
 
 # ---------------------------------------------------------------------------
